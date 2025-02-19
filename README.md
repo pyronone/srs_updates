@@ -1,4 +1,8 @@
 # srs_updates
+
+
+<!-- ... -->
+
 Docs: https://pyronone.github.io/srs_updates/
 
 ## Overview
@@ -65,6 +69,10 @@ Docs: https://pyronone.github.io/srs_updates/
       tickets after each update.
 
 ## Changelog
+
+### 1.0.2
+
+- Update dev environment - minimum Python version is now 3.10
 
 ### 0.3.3
 
