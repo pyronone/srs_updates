@@ -199,6 +199,8 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#updatedata.street2" id="toc-updatedata.street2" class="nav-link" data-scroll-target="#updatedata.street2">UpdateData.street2</a></li>
   <li><a href="#updatedata.close" id="toc-updatedata.close" class="nav-link" data-scroll-target="#updatedata.close">UpdateData.close</a></li>
   <li><a href="#updatedata.comment" id="toc-updatedata.comment" class="nav-link" data-scroll-target="#updatedata.comment">UpdateData.comment</a></li>
+  <li><a href="#updatedata.poa" id="toc-updatedata.poa" class="nav-link" data-scroll-target="#updatedata.poa">UpdateData.poa</a></li>
+  <li><a href="#updatedata.spoa" id="toc-updatedata.spoa" class="nav-link" data-scroll-target="#updatedata.spoa">UpdateData.spoa</a></li>
   </ul></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
@@ -313,7 +315,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.ee_id ()</code></pre>
 </blockquote>
-<p>-&gt; str - <code>Emp ID #1</code></p>
+<p><em>-&gt; str - <code>Emp ID #1</code></em></p>
 <hr>
 </section>
 <section id="updatedata.harmony_url" class="level3">
@@ -321,7 +323,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.harmony_url ()</code></pre>
 </blockquote>
-<p>-&gt; str - url</p>
+<p><em>-&gt; str - url</em></p>
 <hr>
 </section>
 <section id="updatedata.update_date" class="level3">
@@ -329,7 +331,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.update_date ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp - Contact info update date</p>
+<p><em>-&gt; pd.Timestamp | None // Contact info update date</em></p>
 <hr>
 </section>
 <section id="updatedata.full_prov" class="level3">
@@ -337,7 +339,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.full_prov ()</code></pre>
 </blockquote>
-<p>-&gt; str - full province name for address file</p>
+<p><em>-&gt; str - full province name for address file</em></p>
 <hr>
 </section>
 <section id="updatedata.bank_inst" class="level3">
@@ -345,7 +347,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.bank_inst ()</code></pre>
 </blockquote>
-<p>-&gt; str - inst #</p>
+<p><em>-&gt; str - inst #</em></p>
 <hr>
 </section>
 <section id="updatedata.bank_transit" class="level3">
@@ -353,7 +355,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.bank_transit ()</code></pre>
 </blockquote>
-<p>-&gt; str - transit #</p>
+<p><em>-&gt; str - transit #</em></p>
 <hr>
 </section>
 <section id="updatedata.bank_acc" class="level3">
@@ -361,7 +363,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.bank_acc ()</code></pre>
 </blockquote>
-<p>-&gt; str - account #</p>
+<p><em>-&gt; str - account #</em></p>
 <hr>
 </section>
 <section id="updatedata.mdod" class="level3">
@@ -369,7 +371,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.mdod ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp - member DoD</p>
+<p><em>-&gt; pd.Timestamp | None // member DOD</em></p>
 <hr>
 </section>
 <section id="updatedata.sdod" class="level3">
@@ -377,7 +379,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.sdod ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp - spouse DoD</p>
+<p><em>-&gt; pd.Timestamp | None // spouse DoD</em></p>
 <hr>
 </section>
 <section id="updatedata.csd" class="level3">
@@ -385,7 +387,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.csd ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp - Date of Current Status</p>
+<p><em>-&gt; pd.Timestamp | None // Date of Current Status</em></p>
 <hr>
 </section>
 <section id="updatedata.mdob" class="level3">
@@ -393,7 +395,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.mdob ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp</p>
+<p><em>-&gt; pd.Timestamp | None</em></p>
 <hr>
 </section>
 <section id="updatedata.sdob" class="level3">
@@ -401,7 +403,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.sdob ()</code></pre>
 </blockquote>
-<p>-&gt; pd.Timestamp</p>
+<p><em>-&gt; pd.Timestamp | None</em></p>
 <hr>
 </section>
 <section id="updatedata.street1" class="level3">
@@ -409,7 +411,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.street1 ()</code></pre>
 </blockquote>
-<p>-&gt; str - split if <code>c/o</code> in street or if length exceeds 30 characters</p>
+<p><em>-&gt; str - split if <code>c/o</code> in street or if length exceeds 30 characters</em></p>
 <hr>
 </section>
 <section id="updatedata.street2" class="level3">
@@ -417,7 +419,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.street2 ()</code></pre>
 </blockquote>
-<p>-&gt; str</p>
+<p><em>-&gt; str</em></p>
 <hr>
 </section>
 <section id="updatedata.close" class="level3">
@@ -425,7 +427,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.close ()</code></pre>
 </blockquote>
-<p>-&gt; str - Flag if the Harmony log should be closed or re-assigned. Y == close, N == re-assign (death case)</p>
+<p><em>-&gt; str - Flag if the Harmony log should be closed or re-assigned. Y == close, N == re-assign (death case)</em></p>
 <hr>
 </section>
 <section id="updatedata.comment" class="level3">
@@ -433,7 +435,23 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.comment ()</code></pre>
 </blockquote>
-<p>-&gt; str - For <code>Comment</code> column in address file</p>
+<p><em>-&gt; str | None // For <code>Comment</code> column in address file</em></p>
+<hr>
+</section>
+<section id="updatedata.poa" class="level3">
+<h3 class="anchored" data-anchor-id="updatedata.poa">UpdateData.poa</h3>
+<blockquote class="blockquote">
+<pre><code> UpdateData.poa ()</code></pre>
+</blockquote>
+<p><em>-&gt; str | None // <code>Member's Proof of Age on file?</code></em></p>
+<hr>
+</section>
+<section id="updatedata.spoa" class="level3">
+<h3 class="anchored" data-anchor-id="updatedata.spoa">UpdateData.spoa</h3>
+<blockquote class="blockquote">
+<pre><code> UpdateData.spoa ()</code></pre>
+</blockquote>
+<p><em>-&gt; str | None // <code>Spouse’s Proof of Age on file?</code></em></p>
 </section>
 </section>
 <section id="methods" class="level2">
@@ -444,7 +462,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.addNameSuffixIfDeceased ()</code></pre>
 </blockquote>
-<p>Add <code>(Estate of)</code> suffix to first name for deceased member, <code>(died)</code> for deceased spouse</p>
+<p><em>Add <code>(Estate of)</code> suffix to first name for deceased member, <code>(died)</code> for deceased spouse</em></p>
 <hr>
 </section>
 <section id="updatedata.setsrvflag" class="level3">
@@ -452,7 +470,7 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 <blockquote class="blockquote">
 <pre><code> UpdateData.setSrvFlag ()</code></pre>
 </blockquote>
-<p>Checks all associated PIN IDs for a <code>S</code> prefix. Modifies <code>self.srv</code> field if found.</p>
+<p><em>Checks all associated PIN IDs for a <code>S</code> prefix. Modifies <code>self.srv</code> field if found.</em></p>
 
 
 </section>

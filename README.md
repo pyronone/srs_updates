@@ -3,7 +3,8 @@
 
 <!-- ... -->
 
-Docs: https://pyronone.github.io/srs_updates/
+Docs:
+[https://pyronone.github.io/srs_updates/](https://pyronone.github.io/srs_updates)
 
 ## Overview
 
@@ -69,6 +70,14 @@ Docs: https://pyronone.github.io/srs_updates/
       tickets after each update.
 
 ## Changelog
+
+### 1.0.4
+
+- Added codes for proof of age (`[poa]`, `[spoa]`)
+
+### 1.0.3
+
+- Small modification to allow updates for members not in Harmony
 
 ### 1.0.2
 
