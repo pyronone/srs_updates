@@ -29,10 +29,7 @@ Docs:
 ## Process
 
 1.  **Scrape tickets**: Instead of manually visiting each ticket in the
-    browser, all tickets assigned to me in Harmony are scraped using the
-    [Scraper
-    bot](https://pyronone.github.io/harmony_automation/bots.html#scraper)
-    from my
+    browser, all tickets assigned to me in Harmony are scraped using my
     [harmony_automation](https://pyronone.github.io/harmony_automation/index.html)
     package.
     - The scraper gets all comments/notes from the ticket and
@@ -61,15 +58,20 @@ Docs:
       will later be concatenated with files from subsequent updates and
       finalized a few days before the monthly deadline.
 4.  **Close/re-assign tickets**: Tickets in Harmony are automatically
-    closed/re-assigned using the main
-    [Bot](https://pyronone.github.io/harmony_automation/bots.html#bot)
-    from my
+    closed/re-assigned using my
     [harmony_automation](https://pyronone.github.io/harmony_automation/index.html)
     package.
     - This eliminates the need to manually close/re-assign up to 100+
       tickets after each update.
 
 ## Changelog
+
+### 1.1.1
+
+- Update `update_xl` module
+- Add checking function to warn if DOD already in PIN
+- Fix issue with `[excl]` flag
+- Fix pandas future warning concat issue
 
 ### 1.0.4
 

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -258,54 +292,52 @@ Other modules in this package extracts/modifies properties/fields to generate fi
 </section>
 <section id="fields" class="level2">
 <h2 class="anchored" data-anchor-id="fields">Fields</h2>
-<pre><code>    note: str = ""  # full note incl ID and URL
-
-    # contact info
-    email: str = ""
-    phone1: str = ""
-    phone2: str = ""
-    street: str = ""
-    city: str = ""
-    prov: str = ""
-    pc: str = ""
-    country: str = ""
-
-    # names
-    mfn: str = ""
-    mln: str = ""
-    sfn: str = ""
-    sln: str = ""
-    pin_fn: str = ""
-    pin_ln: str = ""
-
-    # death
-    mdod_str: str = ""
-    mdc: str = ""
-    sdod_str: str = ""
-    sdc: str = ""
-
-    # for Harmony
-    death_note: str = ""
-    ticket_num: str = ""
-    key: str = ""  # from legacy system, before ticket #s were implemented
-
-    # current status
-    cs: str = ""
-    csd_str: str = ""
-
-    # PIN
-    payee_status: str = ""
-    banking: str = ""
-
-    # dob
-    mdob_str: str = ""
-    sdob_str: str = ""
-
-    # PIN
-    srv: bool = False
-    pin_update: bool = False
-    rel_pin_ids: list = field(default_factory=_default_empty_list)
-    pin_group: list = field(default_factory=_default_empty_list)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>note: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span>  <span class="co"># full note incl ID and URL</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># contact info</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>email: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>phone1: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>phone2: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>street: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>city: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>prov: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pc: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>country: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># names</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>mfn: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>mln: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>sfn: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>sln: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>pin_fn: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>pin_ln: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="co"># death</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>mdod_str: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>mdc: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>sdod_str: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>sdc: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="co"># for Harmony</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>death_note: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>ticket_num: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>key: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span>  <span class="co"># from legacy system, before ticket #s were implemented</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="co"># current status</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>cs: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>csd_str: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="co"># dob</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>mdob_str: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>sdob_str: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="co"># PIN</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>payee_status: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>banking: <span class="bu">str</span> <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>srv: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>pin_update: <span class="bu">bool</span> <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>rel_pin_ids: <span class="bu">list</span> <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>pin_group: <span class="bu">list</span> <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="properties" class="level2">
 <h2 class="anchored" data-anchor-id="properties">Properties</h2>

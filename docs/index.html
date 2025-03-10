@@ -183,10 +183,11 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#process" id="toc-process" class="nav-link" data-scroll-target="#process">Process</a></li>
   <li><a href="#changelog" id="toc-changelog" class="nav-link" data-scroll-target="#changelog">Changelog</a>
   <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">1.0.4</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1.0.3</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1.0.2</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">0.3.3</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">1.1.1</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1.0.4</a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1.0.3</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">1.0.2</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.3.3</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -232,7 +233,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="process" class="level2">
 <h2 class="anchored" data-anchor-id="process">Process</h2>
 <ol type="1">
-<li><strong>Scrape tickets</strong>: Instead of manually visiting each ticket in the browser, all tickets assigned to me in Harmony are scraped using the <a href="https://pyronone.github.io/harmony_automation/bots.html#scraper">Scraper bot</a> from my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
+<li><strong>Scrape tickets</strong>: Instead of manually visiting each ticket in the browser, all tickets assigned to me in Harmony are scraped using my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
 <ul>
 <li>The scraper gets all comments/notes from the ticket and cleans/formats them in chronological order.</li>
 <li>Tickets where the information is stored in attachments still need to be reviewed manually.</li>
@@ -249,7 +250,7 @@ ul.task-list li input[type="checkbox"] {
 <li>The address file is updated using the <code>update_xl</code> module, copied over from my <a href="https://pyronone.github.io/update_xl/index.html">update_xl</a> package. A changelog is also generated, showing exactly what was updated and when.</li>
 <li>The maintenance file is reviewed manually and saved for later. It will later be concatenated with files from subsequent updates and finalized a few days before the monthly deadline.</li>
 </ul></li>
-<li><strong>Close/re-assign tickets</strong>: Tickets in Harmony are automatically closed/re-assigned using the main <a href="https://pyronone.github.io/harmony_automation/bots.html#bot">Bot</a> from my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
+<li><strong>Close/re-assign tickets</strong>: Tickets in Harmony are automatically closed/re-assigned using my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
 <ul>
 <li>This eliminates the need to manually close/re-assign up to 100+ tickets after each update.</li>
 </ul></li>
@@ -258,25 +259,34 @@ ul.task-list li input[type="checkbox"] {
 <section id="changelog" class="level2">
 <h2 class="anchored" data-anchor-id="changelog">Changelog</h2>
 <section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section">1.0.4</h3>
+<h3 class="anchored" data-anchor-id="section">1.1.1</h3>
+<ul>
+<li>Update <code>update_xl</code> module</li>
+<li>Add checking function to warn if DOD already in PIN</li>
+<li>Fix issue with <code>[excl]</code> flag</li>
+<li>Fix pandas future warning concat issue</li>
+</ul>
+</section>
+<section id="section-1" class="level3">
+<h3 class="anchored" data-anchor-id="section-1">1.0.4</h3>
 <ul>
 <li>Added codes for proof of age (<code>[poa]</code>, <code>[spoa]</code>)</li>
 </ul>
 </section>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1">1.0.3</h3>
+<section id="section-2" class="level3">
+<h3 class="anchored" data-anchor-id="section-2">1.0.3</h3>
 <ul>
 <li>Small modification to allow updates for members not in Harmony</li>
 </ul>
 </section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2">1.0.2</h3>
+<section id="section-3" class="level3">
+<h3 class="anchored" data-anchor-id="section-3">1.0.2</h3>
 <ul>
 <li>Update dev environment - minimum Python version is now 3.10</li>
 </ul>
 </section>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3">0.3.3</h3>
+<section id="section-4" class="level3">
+<h3 class="anchored" data-anchor-id="section-4">0.3.3</h3>
 <ul>
 <li>No longer need to manually specify if a name update also needs to be added to maintenance file - will be automatically detected.</li>
 <li>No longer needed to manually specify if a spouse DOD update is a pre-deceased spouse case - will be automatically detected.</li>
