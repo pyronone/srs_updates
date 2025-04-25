@@ -136,12 +136,6 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./maint_file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">04_maint_file</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./export.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">06_export</span></a>
   </div>
@@ -180,15 +174,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#process" id="toc-process" class="nav-link" data-scroll-target="#process">Process</a></li>
-  <li><a href="#changelog" id="toc-changelog" class="nav-link" data-scroll-target="#changelog">Changelog</a>
-  <ul class="collapse">
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section">1.1.1</a></li>
-  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1">1.0.4</a></li>
-  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2">1.0.3</a></li>
-  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3">1.0.2</a></li>
-  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4">0.3.3</a></li>
-  </ul></li>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">Key Features</a></li>
   </ul>
 </nav>
     </div>
@@ -218,82 +204,27 @@ ul.task-list li input[type="checkbox"] {
 <p>Docs: <a href="https://pyronone.github.io/srs_updates">https://pyronone.github.io/srs_updates/</a></p>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<ul>
-<li>As I am responsible for the day-to-day data updates for Sears, there can upwards of 100+ tickets assigned to me on on a bi-weekly basis. To make the process less tedious and more efficient, I created several scripts to streamline the process.</li>
-<li>What started as relatively simple scripts quickly evolved into full packages designed with maintainability and modularity in mind, along with thorough testing and documentation. This results in:
-<ul>
-<li>Easier accommodation for adding new features and/or changing requirements.</li>
-<li>Greater confidence in functionality and higher consistency, reliability, and quality of results.</li>
-<li>Early detection of potential bugs when refactoring.</li>
-<li>Thorough documentation for reference and knowledge sharing purposes.</li>
-</ul></li>
-<li>This package works in conjunction with some of my <a href="https://github.com/pyronone/">other packages</a> to automate/streamline the data update process. Many features can also be used in other plans, especially ones where CIBC Mellon is also the custodian.</li>
-</ul>
+<p>This package streamlines and automates the data update workflow for Sears, dramatically reducing manual effort and minimizing errors. Designed for efficiency and clarity, the package pulls data directly from our internal ticketing system, organizes it, enriches it with relevant data sources, and outputs fully formatted update files—all at the push of a button.</p>
 </section>
-<section id="process" class="level2">
-<h2 class="anchored" data-anchor-id="process">Process</h2>
-<ol type="1">
-<li><strong>Scrape tickets</strong>: Instead of manually visiting each ticket in the browser, all tickets assigned to me in Harmony are scraped using my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
+<section id="key-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-features">Key Features</h2>
 <ul>
-<li>The scraper gets all comments/notes from the ticket and cleans/formats them in chronological order.</li>
-<li>Tickets where the information is stored in attachments still need to be reviewed manually.</li>
-</ul></li>
-<li><strong>Format notes</strong>: The scraped notes are added to a tracker spreadsheet where they are manually formatted to fit certain patterns/‘codes’.
-<ul>
-<li>By formatting the notes in a particular way, the <code>srs_updates</code> package can automatically extract all the relevant data from the notes to generate files needed for the data updates.</li>
-<li>See the <code>ref/Codes</code> page for a full list of such ‘codes’.<br>
-</li>
-<li>Steps 1-2 are repeated every couple days until the number of pending updates reaches 100 or so.</li>
-</ul></li>
-<li><strong>Run update</strong>: To run an update, a script calls the <code>export.process_notes</code> function to generate all files needed for internal and external data updates. This is typically done every two weeks.
-<ul>
-<li>The address file is updated using the <code>update_xl</code> module, copied over from my <a href="https://pyronone.github.io/update_xl/index.html">update_xl</a> package. A changelog is also generated, showing exactly what was updated and when.</li>
-<li>The maintenance file is reviewed manually and saved for later. It will later be concatenated with files from subsequent updates and finalized a few days before the monthly deadline.</li>
-</ul></li>
-<li><strong>Close/re-assign tickets</strong>: Tickets in Harmony are automatically closed/re-assigned using my <a href="https://pyronone.github.io/harmony_automation/index.html">harmony_automation</a> package.
-<ul>
-<li>This eliminates the need to manually close/re-assign up to 100+ tickets after each update.</li>
-</ul></li>
-</ol>
-</section>
-<section id="changelog" class="level2">
-<h2 class="anchored" data-anchor-id="changelog">Changelog</h2>
-<section id="section" class="level3">
-<h3 class="anchored" data-anchor-id="section">1.1.1</h3>
-<ul>
-<li>Update <code>update_xl</code> module</li>
-<li>Add checking function to warn if DOD already in PIN</li>
-<li>Fix issue with <code>[excl]</code> flag</li>
-<li>Fix pandas future warning concat issue</li>
-</ul>
-</section>
-<section id="section-1" class="level3">
-<h3 class="anchored" data-anchor-id="section-1">1.0.4</h3>
-<ul>
-<li>Added codes for proof of age (<code>[poa]</code>, <code>[spoa]</code>)</li>
-</ul>
-</section>
-<section id="section-2" class="level3">
-<h3 class="anchored" data-anchor-id="section-2">1.0.3</h3>
-<ul>
-<li>Small modification to allow updates for members not in Harmony</li>
-</ul>
-</section>
-<section id="section-3" class="level3">
-<h3 class="anchored" data-anchor-id="section-3">1.0.2</h3>
-<ul>
-<li>Update dev environment - minimum Python version is now 3.10</li>
-</ul>
-</section>
-<section id="section-4" class="level3">
-<h3 class="anchored" data-anchor-id="section-4">0.3.3</h3>
-<ul>
-<li>No longer need to manually specify if a name update also needs to be added to maintenance file - will be automatically detected.</li>
-<li>No longer needed to manually specify if a spouse DOD update is a pre-deceased spouse case - will be automatically detected.</li>
+<li><p><strong>Automated Ticket Scraping</strong></p>
+<p>The tool scrapes relevant data update tickets from our internal ticket system, eliminating the need for manual copy-pasting or sorting.</p></li>
+<li><p><strong>Structured Spreadsheet Interface</strong></p>
+<p>Notes from the tickets are parsed and organized into a centralized spreadsheet using a set of predefined codes, ensuring consistency and readability.</p></li>
+<li><p><strong>Integrated Data Enrichment</strong></p>
+<p>The spreadsheet pulls in supplementary data from various sources, including reports from the plan custodian and our internal databases, to ensure comprehensive and accurate updates.</p></li>
+<li><p><strong>One-Click Update Generation</strong></p>
+<p>With a single command, the package generates all necessary files required to update both internal and external databases. This includes:<br>
+- Data files in the correct format<br>
+- Detailed changelogs<br>
+- Full operation logs for traceability</p></li>
+<li><p><strong>Smart Update Targeting</strong></p>
+<p>The package automatically determines whether each update applies to the internal database, the external database, or both. It also distinguishes whether the update pertains to the member or the surviving spouse, ensuring precise routing and formatting of records.</p></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

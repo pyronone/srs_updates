@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Helper functions and general utils to extract data from text.">
+<meta name="description" content="This module contains a variety of functions to extract data from text, such as emails, phone numbers, addresses, etc. using regex.">
 
 <title>00_core – srs_updates</title>
 <style>
@@ -105,10 +105,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="00_core – srs_updates">
-<meta property="og:description" content="Helper functions and general utils to extract data from text.">
+<meta property="og:description" content="This module contains a variety of functions to extract data from text, such as emails, phone numbers, addresses, etc. using regex.">
 <meta property="og:site_name" content="srs_updates">
 <meta name="twitter:title" content="00_core – srs_updates">
-<meta name="twitter:description" content="Helper functions and general utils to extract data from text.">
+<meta name="twitter:description" content="This module contains a variety of functions to extract data from text, such as emails, phone numbers, addresses, etc. using regex.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -171,12 +171,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./maint_file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">04_maint_file</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="./export.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">06_export</span></a>
   </div>
@@ -214,30 +208,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#init-fxs" id="toc-init-fxs" class="nav-link active" data-scroll-target="#init-fxs">00 init fxs</a>
+  <li><a href="#init" id="toc-init" class="nav-link active" data-scroll-target="#init">00 init</a>
   <ul class="collapse">
-  <li><a href="#setup_logging" id="toc-setup_logging" class="nav-link" data-scroll-target="#setup_logging">setup_logging</a></li>
-  <li><a href="#fp" id="toc-fp" class="nav-link" data-scroll-target="#fp">fp</a></li>
-  <li><a href="#dp" id="toc-dp" class="nav-link" data-scroll-target="#dp">dp</a></li>
+  <li><a href="#setuplogger" id="toc-setuplogger" class="nav-link" data-scroll-target="#setuplogger">setupLogger</a></li>
+  <li><a href="#loadserializedlog" id="toc-loadserializedlog" class="nav-link" data-scroll-target="#loadserializedlog">loadSerializedLog</a></li>
   <li><a href="#yaml_helper" id="toc-yaml_helper" class="nav-link" data-scroll-target="#yaml_helper">yaml_helper</a></li>
   </ul></li>
-  <li><a href="#email" id="toc-email" class="nav-link" data-scroll-target="#email">01 email</a>
+  <li><a href="#extract-emails" id="toc-extract-emails" class="nav-link" data-scroll-target="#extract-emails">01 extract emails</a>
   <ul class="collapse">
   <li><a href="#extract_emails" id="toc-extract_emails" class="nav-link" data-scroll-target="#extract_emails">extract_emails</a></li>
   </ul></li>
-  <li><a href="#phone" id="toc-phone" class="nav-link" data-scroll-target="#phone">02 phone</a>
+  <li><a href="#extract-phone-numbers" id="toc-extract-phone-numbers" class="nav-link" data-scroll-target="#extract-phone-numbers">02 extract phone numbers</a>
   <ul class="collapse">
   <li><a href="#extract_phone1" id="toc-extract_phone1" class="nav-link" data-scroll-target="#extract_phone1">extract_phone1</a></li>
   <li><a href="#extract_phone2" id="toc-extract_phone2" class="nav-link" data-scroll-target="#extract_phone2">extract_phone2</a></li>
   <li><a href="#extract_phone_numbers" id="toc-extract_phone_numbers" class="nav-link" data-scroll-target="#extract_phone_numbers">extract_phone_numbers</a></li>
   </ul></li>
-  <li><a href="#address" id="toc-address" class="nav-link" data-scroll-target="#address">03 address</a>
+  <li><a href="#extract-address" id="toc-extract-address" class="nav-link" data-scroll-target="#extract-address">03 extract address</a>
   <ul class="collapse">
   <li><a href="#full_prov_name" id="toc-full_prov_name" class="nav-link" data-scroll-target="#full_prov_name">full_prov_name</a></li>
   <li><a href="#extract_address1" id="toc-extract_address1" class="nav-link" data-scroll-target="#extract_address1">extract_address1</a></li>
   <li><a href="#extract_address2" id="toc-extract_address2" class="nav-link" data-scroll-target="#extract_address2">extract_address2</a></li>
   </ul></li>
-  <li><a href="#names" id="toc-names" class="nav-link" data-scroll-target="#names">04 names</a>
+  <li><a href="#name-updates" id="toc-name-updates" class="nav-link" data-scroll-target="#name-updates">04 name updates</a>
   <ul class="collapse">
   <li><a href="#extract_names" id="toc-extract_names" class="nav-link" data-scroll-target="#extract_names">extract_names</a></li>
   </ul></li>
@@ -251,7 +244,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#payee_status_and_banking" id="toc-payee_status_and_banking" class="nav-link" data-scroll-target="#payee_status_and_banking">payee_status_and_banking</a></li>
   </ul></li>
-  <li><a href="#dob" id="toc-dob" class="nav-link" data-scroll-target="#dob">07 dob</a>
+  <li><a href="#dob" id="toc-dob" class="nav-link" data-scroll-target="#dob">07 DOB</a>
   <ul class="collapse">
   <li><a href="#dob_updates" id="toc-dob_updates" class="nav-link" data-scroll-target="#dob_updates">dob_updates</a></li>
   </ul></li>
@@ -268,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    Helper functions and general utils to extract data from text.
+    This module contains a variety of functions to extract data from text, such as emails, phone numbers, addresses, etc. using regex.
   </div>
 </div>
 
@@ -286,30 +279,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- ... -->
-<section id="init-fxs" class="level1">
-<h1>00 init fxs</h1>
+<section id="init" class="level1">
+<h1>00 init</h1>
 <hr>
-<section id="setup_logging" class="level3">
-<h3 class="anchored" data-anchor-id="setup_logging">setup_logging</h3>
+<section id="setuplogger" class="level3">
+<h3 class="anchored" data-anchor-id="setuplogger">setupLogger</h3>
 <blockquote class="blockquote">
-<pre><code> setup_logging ()</code></pre>
+<pre><code> setupLogger (name:str='log', serialize:bool=False)</code></pre>
 </blockquote>
-<p><em>add handler attached to <code>updates.log</code> @ trace level and up</em></p>
-<hr>
-</section>
-<section id="fp" class="level3">
-<h3 class="anchored" data-anchor-id="fp">fp</h3>
-<blockquote class="blockquote">
-<pre><code> fp (_path:str='', ambiguous_err:bool=True)</code></pre>
-</blockquote>
-<p><em>For referencing relative file paths in dev env. Assumes core is always one level down from project root directory.</em></p>
+<p><em>add handler attached to <code>&lt;name&gt;.log</code> @ trace level and up</em></p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 25%">
-<col style="width: 34%">
-<col style="width: 34%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -320,40 +299,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>_path</td>
+<td>name</td>
 <td>str</td>
-<td></td>
-<td>str - eg. <code>"../dat/some_file.csv"</code> == <code>"&lt;project_root&gt;/dat/some_file.csv&gt;"</code></td>
+<td>log</td>
+<td>str</td>
 </tr>
 <tr class="even">
-<td>ambiguous_err</td>
+<td>serialize</td>
 <td>bool</td>
-<td>True</td>
-<td>bool - if True, will raise exception if path is ambiguous when running docs generation vs dev env</td>
+<td>False</td>
+<td>bool</td>
 </tr>
 <tr class="odd">
 <td><strong>Returns</strong></td>
-<td><strong>str</strong></td>
+<td><strong>None</strong></td>
 <td></td>
-<td><strong>str</strong></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 <hr>
 </section>
-<section id="dp" class="level3">
-<h3 class="anchored" data-anchor-id="dp">dp</h3>
+<section id="loadserializedlog" class="level3">
+<h3 class="anchored" data-anchor-id="loadserializedlog">loadSerializedLog</h3>
 <blockquote class="blockquote">
-<pre><code> dp (_path:str='', ambiguous_err:bool=True)</code></pre>
+<pre><code> loadSerializedLog (log_fp:str, incl_full_record:bool=False,
+                    incl_unix_ts:bool=False)</code></pre>
 </blockquote>
-<p><em>For referencing relative file paths in dev env. Assumes core is always one level down from project root directory.</em></p>
+<p><em>-&gt; pd.DataFrame</em></p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 25%">
-<col style="width: 34%">
-<col style="width: 34%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
@@ -364,22 +338,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>_path</td>
+<td>log_fp</td>
 <td>str</td>
 <td></td>
-<td>str - eg. <code>"../dat/some_file.csv"</code> == <code>"&lt;project_root&gt;/dat/some_file.csv&gt;"</code></td>
+<td>str</td>
 </tr>
 <tr class="even">
-<td>ambiguous_err</td>
+<td>incl_full_record</td>
 <td>bool</td>
-<td>True</td>
-<td>bool - if True, will raise exception if path is ambiguous when running docs generation vs dev env</td>
+<td>False</td>
+<td>bool</td>
 </tr>
 <tr class="odd">
+<td>incl_unix_ts</td>
+<td>bool</td>
+<td>False</td>
+<td>bool</td>
+</tr>
+<tr class="even">
 <td><strong>Returns</strong></td>
-<td><strong>str</strong></td>
+<td><strong>DataFrame</strong></td>
 <td></td>
-<td><strong>str</strong></td>
+<td><strong>pd.DataFrame</strong></td>
 </tr>
 </tbody>
 </table>
@@ -434,18 +414,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-7" class="cell">
+<div id="cell-6" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>_fp <span class="op">=</span> fp(<span class="st">"../cfg/cfg.yml"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> os.path.exists(_fp)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">list</span>(yaml_helper(_fp).keys()) <span class="op">==</span> [<span class="st">"test_cml_fp"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>_fp <span class="op">=</span> fp(<span class="st">"../cfg/cfg.yml"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> os.path.exists(_fp)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> <span class="bu">list</span>(yaml_helper(_fp).keys()) <span class="op">==</span> [<span class="st">"test_cml_fp"</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 </section>
-<section id="email" class="level1">
-<h1>01 email</h1>
+<section id="extract-emails" class="level1">
+<h1>01 extract emails</h1>
 <hr>
 <section id="extract_emails" class="level3">
 <h3 class="anchored" data-anchor-id="extract_emails">extract_emails</h3>
@@ -474,68 +454,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-10" class="cell">
+<div id="cell-9" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(<span class="st">"Some text here bob@gmail.ca some text here"</span>) <span class="op">==</span> <span class="st">"bob@gmail.ca"</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    extract_emails(<span class="st">"sdasd asd a232 very.common@example.com //"</span>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"very.common@example.com"</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"sdasd asd FirstName.LastName@EasierReading.org"</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"FirstName.LastName@EasierReading.org"</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(<span class="st">"sds extract_emails x@example.com asda "</span>) <span class="op">==</span> <span class="st">"x@example.com"</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    extract_emails(</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"long.email-address-with-hyphens@and.subdomains.example.com asda dasd asdasd "</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"long.email-address-with-hyphens@and.subdomains.example.com"</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd adasd user.name+tag+sorting@example.com asd asd "</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"user.name+tag+sorting@example.com"</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd adasd user.name+tag+sorting@s.example    asd asd "</span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"user.name+tag+sorting@s.example"</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> (</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dasd bob@gmail.com adasd user.name+tag+sorting@s.example    asd asd "</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> <span class="st">"dasd adasd user.name+tag+sorting@example.com asd asd "</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    extract_emails(t_str)</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"bob@gmail.com // user.name+tag+sorting@s.example // user.name+tag+sorting@example.com"</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(<span class="st">"Some text here bob@gmail.ca some text here"</span>) <span class="op">==</span> <span class="st">"bob@gmail.ca"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    extract_emails(<span class="st">"sdasd asd a232 very.common@example.com //"</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"very.common@example.com"</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"sdasd asd FirstName.LastName@EasierReading.org"</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"FirstName.LastName@EasierReading.org"</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(<span class="st">"sds extract_emails x@example.com asda "</span>) <span class="op">==</span> <span class="st">"x@example.com"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    extract_emails(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"long.email-address-with-hyphens@and.subdomains.example.com asda dasd asdasd "</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"long.email-address-with-hyphens@and.subdomains.example.com"</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd adasd user.name+tag+sorting@example.com asd asd "</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"user.name+tag+sorting@example.com"</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd adasd user.name+tag+sorting@s.example    asd asd "</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_emails(t_str) <span class="op">==</span> <span class="st">"user.name+tag+sorting@s.example"</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> (</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"dasd bob@gmail.com adasd user.name+tag+sorting@s.example    asd asd "</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> <span class="st">"dasd adasd user.name+tag+sorting@example.com asd asd "</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>    extract_emails(t_str)</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"bob@gmail.com // user.name+tag+sorting@s.example // user.name+tag+sorting@example.com"</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Supposedly, this is a valid email but the script won’t pick it up. Unlikely to encounter.</p>
-<div id="cell-12" class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"admin@exampl sdasd "</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>extract_emails(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-11" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"admin@exampl sdasd "</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>extract_emails(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>''</code></pre>
 </div>
 </div>
 <p>Forward slash is supposedly valid as well but the script won’t pick this up. Unlikely to encounter.</p>
-<div id="cell-14" class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd name/surname@example.com sdasd "</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>extract_emails(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-13" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"dasd name/surname@example.com sdasd "</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>extract_emails(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>'surname@example.com'</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="phone" class="level1">
-<h1>02 phone</h1>
+<section id="extract-phone-numbers" class="level1">
+<h1>02 extract phone numbers</h1>
 <hr>
 <section id="extract_phone1" class="level3">
 <h3 class="anchored" data-anchor-id="extract_phone1">extract_phone1</h3>
 <blockquote class="blockquote">
 <pre><code> extract_phone1 (t_str:str)</code></pre>
 </blockquote>
-<p><em>Extract all phone numbers using <code>xxx-xxx-xxxx</code> pattern or <code>[ph:...]</code> if alternate format (eg. <code>[ph:123-456-7890 ext. 8001]</code>)</em></p>
+<p>*Extract all phone numbers using <code>xxx-xxx-xxxx</code> pattern or <code>[ph:...]</code> if alternate format (eg. <code>[ph:123-456-7890 ext. 8001]</code>).</p>
+<p>If the latter pattern is found, does not check for the former.*</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -557,39 +538,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-17" class="cell">
+<div id="cell-16" class="cell">
+<details class="code-fold">
+<summary>Tests</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"dasda  123-123-1234 // 123-343-4521 "</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"123-123-1234 // 123-343-4521"</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"asdasd as [ph: 903-123-4365 ext 8001] // sadasd "</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"asdasd as [pH: 903-123-4365 ext 8001] // sadasd "</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Use <code>[ph:...]</code> for phone numbers that have a pattern different from <code>xxx-xxx-xxxx</code>.<br>
+If using <code>[ph:...]</code> and there are multiple numbers, put them all within the square brackets.</p>
+<div id="cell-18" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"dasda  123-123-1234 // 123-343-4521 "</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"123-123-1234 // 123-343-4521"</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"asdasd as [ph: 903-123-4365 ext 8001] // sadasd "</span>)</span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    extract_phone1(<span class="st">"asdasd as [pH: 903-123-4365 ext 8001] // sadasd "</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    extract_phone1(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"asdasd as [pH: 903-123-4365 ext 8001] // 123-456-7890 - [cell:999-999-9999] sadasd "</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    extract_phone1(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"asdasd as [pH: 903-123-4365 ext 8001 // 123-456-7890] //  [cell:999-999-9999] sadasd "</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001 // 123-456-7890"</span></span>
 <span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<p>If using <code>[ph:...]</code> and there are multiple numbers, put them all within the square brackets.</p>
-<div id="cell-19" class="cell">
-<details class="code-fold">
-<summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    extract_phone1(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">"asdasd as [pH: 903-123-4365 ext 8001] // 123-456-7890 - [cell:999-999-9999] sadasd "</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001"</span></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    extract_phone1(</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"asdasd as [pH: 903-123-4365 ext 8001 // 123-456-7890] //  [cell:999-999-9999] sadasd "</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"903-123-4365 ext 8001 // 123-456-7890"</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
@@ -621,16 +603,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-21" class="cell">
+<div id="cell-20" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad 123-213-4521"</span>) <span class="op">==</span> <span class="st">""</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad [cell: 123-213-4521  ]"</span>) <span class="op">==</span> <span class="st">"123-213-4521"</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad [CELL:  123-213-4521  ]"</span>) <span class="op">==</span> <span class="st">"123-213-4521"</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    extract_phone2(<span class="st">"asdsad [CELL:  123-213-4521 // 999-99999999999 ]"</span>)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"123-213-4521 // 999-99999999999"</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad 123-213-4521"</span>) <span class="op">==</span> <span class="st">""</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad [cell: 123-213-4521  ]"</span>) <span class="op">==</span> <span class="st">"123-213-4521"</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone2(<span class="st">"asdsad [CELL:  123-213-4521  ]"</span>) <span class="op">==</span> <span class="st">"123-213-4521"</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> (</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    extract_phone2(<span class="st">"asdsad [CELL:  123-213-4521 // 999-99999999999 ]"</span>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="op">==</span> <span class="st">"123-213-4521 // 999-99999999999"</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
@@ -662,47 +644,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-23" class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>extract_phone_numbers(<span class="st">".. [remove phone] asdsad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>extract_phone_numbers(<span class="st">".. [remove phone] asdsad"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>('&lt;&lt;&lt;blank&gt;&gt;&gt;', '&lt;&lt;&lt;blank&gt;&gt;&gt;')</code></pre>
 </div>
 </div>
-<p><code>&lt;&lt;&lt;blank&gt;&gt;&gt;</code> tells the <code>update_xl</code> module / package to clear existing data.</p>
-<div id="cell-25" class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>extract_phone_numbers(<span class="st">"123 sesame st ... 123-345-3245 // [cell: 9051235453]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>&lt;&lt;&lt;blank&gt;&gt;&gt;</code> tells the <code>update_xl</code> module to clear existing data.</p>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>extract_phone_numbers(<span class="st">"123 sesame st ... 123-345-3245 // [cell: 9051235453]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <pre><code>('123-345-3245', '9051235453')</code></pre>
 </div>
 </div>
 <p>More tests:</p>
-<div id="cell-27" class="cell">
+<div id="cell-26" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"123 sesame st ... 123-345-3245 // [cell: 905-123-5453]"</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-345-3245"</span>, <span class="st">"905-123-5453"</span>)</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"... [ph: 123-432-5643 ext 900] // [cell: 123-345-4452 ext 9000 ]"</span></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-432-5643 ext 900"</span>, <span class="st">"123-345-4452 ext 9000"</span>)</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(<span class="st">"234 123-123-1234 // 234-234-2345"</span>) <span class="op">==</span> (</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"123-123-1234 // 234-234-2345"</span>,</span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>,</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"223423434 sadasd 123-123-1234 // 234-234-2345 // [cell: 123-543-9999]"</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-123-1234 // 234-234-2345"</span>, <span class="st">"123-543-9999"</span>)</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"223423434 sadasd [ph: 123-123-1234 // 234-234-2345 (POA)]// [cell: 123-543-9999]"</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-123-1234 // 234-234-2345 (POA)"</span>, <span class="st">"123-543-9999"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"123 sesame st ... 123-345-3245 // [cell: 905-123-5453]"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-345-3245"</span>, <span class="st">"905-123-5453"</span>)</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"... [ph: 123-432-5643 ext 900] // [cell: 123-345-4452 ext 9000 ]"</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-432-5643 ext 900"</span>, <span class="st">"123-345-4452 ext 9000"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(<span class="st">"234 123-123-1234 // 234-234-2345"</span>) <span class="op">==</span> (</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"123-123-1234 // 234-234-2345"</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">""</span>,</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"223423434 sadasd 123-123-1234 // 234-234-2345 // [cell: 123-543-9999]"</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-123-1234 // 234-234-2345"</span>, <span class="st">"123-543-9999"</span>)</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"223423434 sadasd [ph: 123-123-1234 // 234-234-2345 (POA)] 456-234-1231 // [cell: 123-543-9999]"</span></span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>) <span class="op">==</span> (<span class="st">"123-123-1234 // 234-234-2345 (POA)"</span>, <span class="st">"123-543-9999"</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"[cell:306-535-5490]"</span></span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(t_str) <span class="op">==</span> (<span class="st">""</span>, <span class="st">"306-535-5490"</span>)</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... 306-535-5490 sdasd"</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_phone_numbers(t_str) <span class="op">==</span> (<span class="st">"306-535-5490"</span>, <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
 </section>
-<section id="address" class="level1">
-<h1>03 address</h1>
+<section id="extract-address" class="level1">
+<h1>03 extract address</h1>
 <hr>
 <section id="full_prov_name" class="level3">
 <h3 class="anchored" data-anchor-id="full_prov_name">full_prov_name</h3>
@@ -731,13 +719,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-30" class="cell">
+<div id="cell-29" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"FL"</span>) <span class="op">==</span> <span class="st">"FL"</span>  <span class="co"># if not found, returns input string</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"on"</span>) <span class="op">==</span> <span class="st">"Ontario"</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"yt"</span>) <span class="op">==</span> <span class="st">"Yukon"</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"Bc"</span>) <span class="op">==</span> <span class="st">"British Columbia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"FL"</span>) <span class="op">==</span> <span class="st">"FL"</span>  <span class="co"># if not found, returns input string</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"on"</span>) <span class="op">==</span> <span class="st">"Ontario"</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"yt"</span>) <span class="op">==</span> <span class="st">"Yukon"</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> full_prov_name(<span class="st">"Bc"</span>) <span class="op">==</span> <span class="st">"British Columbia"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <hr>
@@ -775,65 +763,68 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 <p>Address can be formatted in a variety of ways. See below tests for examples.</p>
-<div id="cell-33" class="cell">
+<div id="cell-32" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON  M5X 2D1  // ... "</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON   M5X2D1  // ... "</span></span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON.   M5X2D1  // ... "</span></span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
-<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
-<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Quebec,  QC.   M5X2D1  // ... "</span></span>
-<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quebec"</span>,</span>
-<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"QC"</span>,</span>
-<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Quebec,  qc.   M5X2D1  // ... "</span></span>
-<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quebec"</span>,</span>
-<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"QC"</span>,</span>
-<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Some City,  pe,   M5X2D1  // ... "</span></span>
-<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
-<span id="cb26-43"><a href="#cb26-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
-<span id="cb26-44"><a href="#cb26-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some City"</span>,</span>
-<span id="cb26-45"><a href="#cb26-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PE"</span>,</span>
-<span id="cb26-46"><a href="#cb26-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
-<span id="cb26-47"><a href="#cb26-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
-<span id="cb26-48"><a href="#cb26-48" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON  M5X 2D1  // ... "</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON   M5X2D1  // ... "</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Toronto, ON.   M5X2D1  // ... "</span></span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Toronto"</span>,</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ON"</span>,</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Quebec,  QC.   M5X2D1  // ... "</span></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quebec"</span>,</span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"QC"</span>,</span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Quebec,  qc.   M5X2D1  // ... "</span></span>
+<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Quebec"</span>,</span>
+<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a>    <span class="st">"QC"</span>,</span>
+<span id="cb25-38"><a href="#cb25-38" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-39"><a href="#cb25-39" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-40"><a href="#cb25-40" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-41"><a href="#cb25-41" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Some City,  pe,   M5X2D1  // ... "</span></span>
+<span id="cb25-42"><a href="#cb25-42" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> extract_address1(t_str) <span class="op">==</span> (</span>
+<span id="cb25-43"><a href="#cb25-43" aria-hidden="true" tabindex="-1"></a>    <span class="st">"c/o Jim Bob, 123 Sesame St"</span>,</span>
+<span id="cb25-44"><a href="#cb25-44" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Some City"</span>,</span>
+<span id="cb25-45"><a href="#cb25-45" aria-hidden="true" tabindex="-1"></a>    <span class="st">"PE"</span>,</span>
+<span id="cb25-46"><a href="#cb25-46" aria-hidden="true" tabindex="-1"></a>    <span class="st">"M5X 2D1"</span>,</span>
+<span id="cb25-47"><a href="#cb25-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Canada"</span>,</span>
+<span id="cb25-48"><a href="#cb25-48" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>If the pattern indicates it is a Canadian address but the province isn’t a valid abbreviation, a warning will be raised:</p>
-<div id="cell-35" class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... "</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>extract_address1(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="cell-34" class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... "</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>extract_address1(t_str)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>2025-02-21 15:57:37.713 | WARNING  | __main__:extract_address1:49 - Check province - s/b abbreviated; input str: ... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... </code></pre>
+<pre><code>2025-04-25 12:49:47.273 | WARNING  | __main__:extract_address1:49 - Check province - s/b abbreviated; input str: ... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... </code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<pre><code>('c/o Jim Bob, 123 Sesame St', 'Some City', 'MA', 'M5X 2D1', 'Canada')</code></pre>
 </div>
 </div>
 <hr>
@@ -843,7 +834,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <blockquote class="blockquote">
 <pre><code> extract_address2 (t_str:str)</code></pre>
 </blockquote>
-<p><em><code>extract_address1</code> only works for Canadian addresses. This one is for intl addresses.</em></p>
+<p><em><code>extract_address1</code> only works for Canadian addresses. This one is for non-Canadian addresses.</em></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -865,7 +856,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-37" class="cell">
+<div id="cell-36" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"[street:123 Sesame St][city:Miami][prov:FL][pc:02345][country:US]"</span></span>
@@ -874,8 +865,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </section>
 </section>
-<section id="names" class="level1">
-<h1>04 names</h1>
+<section id="name-updates" class="level1">
+<h1>04 name updates</h1>
 <hr>
 <section id="extract_names" class="level3">
 <h3 class="anchored" data-anchor-id="extract_names">extract_names</h3>
@@ -904,7 +895,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-40" class="cell">
+<div id="cell-39" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"[FN:Bob][Ln: Jim] [sfn:Mary][sln:Thomas]"</span></span>
@@ -954,7 +945,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-43" class="cell">
+<div id="cell-42" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> check_mbr_death(<span class="st">" // [mdod:1-jan-2020][dc] // "</span>) <span class="op">==</span> (</span>
@@ -1013,7 +1004,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-45" class="cell">
+<div id="cell-44" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> check_spouse_death(<span class="st">" // [sdod:1-jan-2020][sdc] // "</span>) <span class="op">==</span> (</span>
@@ -1072,7 +1063,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-47" class="cell">
+<div id="cell-46" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"[sd:1-jan-2023][md:1-feb-2024]"</span></span>
@@ -1150,7 +1141,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-51" class="cell">
+<div id="cell-50" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="cf">assert</span> payee_status_and_banking(<span class="st">"// [bank:123-12334-312312312312] asdasd "</span>) <span class="op">==</span> (</span>
@@ -1191,7 +1182,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </section>
 <section id="dob" class="level1">
-<h1>07 dob</h1>
+<h1>07 DOB</h1>
 <hr>
 <section id="dob_updates" class="level3">
 <h3 class="anchored" data-anchor-id="dob_updates">dob_updates</h3>
@@ -1225,7 +1216,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<div id="cell-54" class="cell">
+<div id="cell-53" class="cell">
 <details class="code-fold">
 <summary>Tests</summary>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>t_str <span class="op">=</span> <span class="st">"[mdob:1-jan-1960]"</span></span>

@@ -170,12 +170,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../maint_file.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">04_maint_file</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
   <a href="../export.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">06_export</span></a>
   </div>
@@ -257,7 +251,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>[ph:...]</code></li>
 <li><code>[cell:...]</code><br>
 </li>
-<li><code>[remove phone]</code></li>
+<li><code>[remove phone]</code><br>
+</li>
+<li><code>[rbp]</code></li>
 </ul>
 <p>Note that street, city, etc. is only needed for non-Canadian addresses. Canadian addresses, within certain formatting specifications, will be picked up automatically.</p>
 <p>Examples:</p>
@@ -426,7 +422,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><code>[cls]</code> - flag to close log if default behaviour is to re-assign</li>
 <li><code>[excl]</code> - indicates the update should be excluded from the maintenance file</li>
-<li><code>[comment:...]</code> - append to <code>Comment</code> column in address file</li>
+<li><code>[comment:...]</code> - append to <code>Comment</code> column in address file<br>
+</li>
+<li><code>[rbp]</code> - adds <code>Returned Mail</code> flag to internal database, sets mailing address to TELUS Health address in CIBC Mellon’s database</li>
 </ul>
 
 
