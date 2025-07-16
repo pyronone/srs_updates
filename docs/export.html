@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Module containing main function to call to process/convert list of notes and generate files for internal/external updates.">
+<meta name="description" content="Module containing functions to process/convert list of notes and generate all output files for internal/external updates.">
 
 <title>06_export – srs_updates</title>
 <style>
@@ -71,10 +71,10 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="06_export – srs_updates">
-<meta property="og:description" content="Module containing main function to call to process/convert list of notes and generate files for internal/external updates.">
+<meta property="og:description" content="Module containing functions to process/convert list of notes and generate all output files for internal/external updates.">
 <meta property="og:site_name" content="srs_updates">
 <meta name="twitter:title" content="06_export – srs_updates">
-<meta name="twitter:description" content="Module containing main function to call to process/convert list of notes and generate files for internal/external updates.">
+<meta name="twitter:description" content="Module containing functions to process/convert list of notes and generate all output files for internal/external updates.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">srs_updates</span></a>
+ <span class="menu-text">From Tedious to Effortless</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -147,6 +147,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">08_update_xl</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11_harmony_automation</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -174,9 +180,16 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#process-notes-export" id="toc-process-notes-export" class="nav-link active" data-scroll-target="#process-notes-export">01 process notes, export</a>
+  <li><a href="#export-files" id="toc-export-files" class="nav-link active" data-scroll-target="#export-files">01 export files</a>
   <ul class="collapse">
-  <li><a href="#process_notes" id="toc-process_notes" class="nav-link" data-scroll-target="#process_notes">process_notes</a></li>
+  <li><a href="#createlogtrkfile" id="toc-createlogtrkfile" class="nav-link" data-scroll-target="#createlogtrkfile">createLogTrkFile</a></li>
+  <li><a href="#createafupdatefile" id="toc-createafupdatefile" class="nav-link" data-scroll-target="#createafupdatefile">createAfUpdateFile</a></li>
+  <li><a href="#createmaintworkfile" id="toc-createmaintworkfile" class="nav-link" data-scroll-target="#createmaintworkfile">createMaintWorkFile</a></li>
+  <li><a href="#exportfiles" id="toc-exportfiles" class="nav-link" data-scroll-target="#exportfiles">exportFiles</a></li>
+  </ul></li>
+  <li><a href="#import" id="toc-import" class="nav-link" data-scroll-target="#import">02 import</a>
+  <ul class="collapse">
+  <li><a href="#loadpickledupdates" id="toc-loadpickledupdates" class="nav-link" data-scroll-target="#loadpickledupdates">loadPickledUpdates</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -191,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Module containing main function to call to process/convert list of notes and generate files for internal/external updates.
+    Module containing functions to process/convert list of notes and generate all output files for internal/external updates.
   </div>
 </div>
 
@@ -209,54 +222,165 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- ... -->
-<section id="process-notes-export" class="level1">
-<h1>01 process notes, export</h1>
+<section id="export-files" class="level1">
+<h1>01 export files</h1>
 <hr>
-<section id="process_notes" class="level3">
-<h3 class="anchored" data-anchor-id="process_notes">process_notes</h3>
+<section id="createlogtrkfile" class="level3">
+<h3 class="anchored" data-anchor-id="createlogtrkfile">createLogTrkFile</h3>
 <blockquote class="blockquote">
-<pre><code> process_notes (notes:list[str], export:bool=False,
-                test_cml_fp:str|None=None)</code></pre>
+<pre><code> createLogTrkFile (updates:srs_updates.srs_specific.Updates,
+                   out_fpath:str)</code></pre>
 </blockquote>
-<p><em>Processes list of notes, converting each one into an <code>UpdateData</code> object and stores them in an <code>Updates</code> container object.</em></p>
+<p><em>create log_trk df</em></p>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 6%">
-<col style="width: 25%">
-<col style="width: 34%">
-<col style="width: 34%">
-</colgroup>
 <thead>
 <tr class="header">
 <th></th>
 <th><strong>Type</strong></th>
-<th><strong>Default</strong></th>
 <th><strong>Details</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>notes</td>
-<td>list</td>
-<td></td>
-<td>list[str]</td>
+<td>updates</td>
+<td>Updates</td>
+<td>ss.Updates</td>
 </tr>
 <tr class="even">
-<td>export</td>
-<td>bool</td>
-<td>False</td>
-<td>If True, creates export directory w/ datetime suffix and exports the following:<br><br>- notes list yml<br>- pickled Updates object<br>- AF updates xlsx<br>- working maint file updates xlsx<br>- offcycle file xlsx<br>- log trk xlsx</td>
+<td>out_fpath</td>
+<td>str</td>
+<td>str</td>
 </tr>
 <tr class="odd">
-<td>test_cml_fp</td>
-<td>str | None</td>
-<td>None</td>
-<td>disregard, deprecated</td>
+<td><strong>Returns</strong></td>
+<td><strong>DataFrame</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="createafupdatefile" class="level3">
+<h3 class="anchored" data-anchor-id="createafupdatefile">createAfUpdateFile</h3>
+<blockquote class="blockquote">
+<pre><code> createAfUpdateFile (updates:srs_updates.srs_specific.Updates)</code></pre>
+</blockquote>
+<p><em>-&gt; pd.DataFrame</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>updates</td>
+<td>Updates</td>
+<td>ss.Updates</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>DataFrame</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="createmaintworkfile" class="level3">
+<h3 class="anchored" data-anchor-id="createmaintworkfile">createMaintWorkFile</h3>
+<blockquote class="blockquote">
+<pre><code> createMaintWorkFile (updates:srs_updates.srs_specific.Updates)</code></pre>
+</blockquote>
+<p><em>-&gt; pd.DataFrame</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>updates</td>
+<td>Updates</td>
+<td>ss.Updates</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>DataFrame</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="exportfiles" class="level3">
+<h3 class="anchored" data-anchor-id="exportfiles">exportFiles</h3>
+<blockquote class="blockquote">
+<pre><code> exportFiles (updates:srs_updates.srs_specific.Updates)</code></pre>
+</blockquote>
+<p>*Create export directory w/ datetime suffix and exports the following:</p>
+<ul>
+<li>notes list yml</li>
+<li>pickled Updates object</li>
+<li>AF updates xlsx</li>
+<li>working maint file updates xlsx</li>
+<li>offcycle file xlsx</li>
+<li>log trk xlsx*</li>
+</ul>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>updates</td>
+<td>Updates</td>
+<td>ss.Updates</td>
+</tr>
+<tr class="even">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="import" class="level1">
+<h1>02 import</h1>
+<hr>
+<section id="loadpickledupdates" class="level3">
+<h3 class="anchored" data-anchor-id="loadpickledupdates">loadPickledUpdates</h3>
+<blockquote class="blockquote">
+<pre><code> loadPickledUpdates (fpath:str)</code></pre>
+</blockquote>
+<p><em>Load exported pickled Updates object</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>fpath</td>
+<td>str</td>
+<td>str</td>
 </tr>
 <tr class="even">
 <td><strong>Returns</strong></td>
 <td><strong>Updates</strong></td>
-<td></td>
 <td><strong>ss.Updates</strong></td>
 </tr>
 </tbody>

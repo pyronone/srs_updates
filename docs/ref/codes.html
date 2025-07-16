@@ -147,7 +147,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">srs_updates</span></a>
+ <span class="menu-text">From Tedious to Effortless</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -178,6 +178,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="../update_xl.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">08_update_xl</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../harmony_automation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11_harmony_automation</span></a>
   </div>
 </li>
         <li class="sidebar-item sidebar-item-section">
@@ -254,6 +260,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>[remove phone]</code><br>
 </li>
 <li><code>[rbp]</code></li>
+<li><code>[partial]</code>
+<ul>
+<li>If using street, city, etc. but only partial update required. Fills empty values with what’s already in the address file.</li>
+</ul></li>
 </ul>
 <p>Note that street, city, etc. is only needed for non-Canadian addresses. Canadian addresses, within certain formatting specifications, will be picked up automatically.</p>
 <p>Examples:</p>
@@ -425,6 +435,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>[comment:...]</code> - append to <code>Comment</code> column in address file<br>
 </li>
 <li><code>[rbp]</code> - adds <code>Returned Mail</code> flag to internal database, sets mailing address to TELUS Health address in CIBC Mellon’s database</li>
+<li><code>[ssin:...]</code></li>
+<li><code>[lang:E]</code> or <code>[lang:F]</code></li>
+<li><code>[mail]</code></li>
+<li><code>[remove spouse]</code></li>
 </ul>
 
 

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>srs_updates</title>
+<title>From Tedious to Effortless – srs_updates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -69,10 +69,10 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="srs_updates">
+<meta property="og:title" content="From Tedious to Effortless – srs_updates">
 <meta property="og:description" content="…">
 <meta property="og:site_name" content="srs_updates">
-<meta name="twitter:title" content="srs_updates">
+<meta name="twitter:title" content="From Tedious to Effortless – srs_updates">
 <meta name="twitter:description" content="…">
 <meta name="twitter:card" content="summary">
 </head>
@@ -98,7 +98,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">srs_updates</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">From Tedious to Effortless</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -113,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">srs_updates</span></a>
+ <span class="menu-text">From Tedious to Effortless</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -146,6 +146,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">08_update_xl</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11_harmony_automation</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -173,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#streamlined-data-updates-with-python" id="toc-streamlined-data-updates-with-python" class="nav-link active" data-scroll-target="#streamlined-data-updates-with-python">Streamlined Data Updates with Python</a></li>
   <li><a href="#key-features" id="toc-key-features" class="nav-link" data-scroll-target="#key-features">Key Features</a></li>
   </ul>
 </nav>
@@ -183,7 +189,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">srs_updates</h1>
+<h1 class="title">From Tedious to Effortless</h1>
 </div>
 
 
@@ -201,27 +207,42 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- ... -->
-<p>Docs: <a href="https://pyronone.github.io/srs_updates">https://pyronone.github.io/srs_updates/</a></p>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This package streamlines and automates the data update workflow for Sears, dramatically reducing manual effort and minimizing errors. Designed for efficiency and clarity, the package pulls data directly from our internal ticketing system, organizes it, enriches it with relevant data sources, and outputs fully formatted update files—all at the push of a button.</p>
+<section id="streamlined-data-updates-with-python" class="level2">
+<h2 class="anchored" data-anchor-id="streamlined-data-updates-with-python">Streamlined Data Updates with Python</h2>
+<hr>
+<p>When I first joined, processing day-to-day data updates for the Sears plan was a painfully manual process.</p>
+<p>Every month, we’d comb through tickets in Harmony (our internal ticket system) one by one, copy-pasting details into a sprawling Excel ‘database’ and manually cross-referencing and updating a separate ‘maintenance file’ — a critical file sent monthly to CIBC Mellon to update and sync their systems.</p>
+<p>The process was so tedious it led to skipped steps and one of my first tasks when I joined was actually untangling incongruent data between the internal and external databases.</p>
+<p>Enter <code>srs_updates</code>.</p>
+<p>Now, the entire workflow is streamlined and runs like clockwork: Harmony tickets are scraped automatically and exported into a spreadsheet for quick review and formatting, the database is updated quickly and accurately via scripts and macros, and the maintenance files are generated automatically with only minor revisions needed at the end.</p>
+<p>What once took hours of manual work now runs automatically in minutes with near-perfect accuracy.</p>
+<p>New features and quality of life improvements are constantly being added, with rigorous testing and comprehensive documentation.</p>
+<p>And the real beauty is that this solution can easily be adapted for other plans.</p>
+<hr>
 </section>
 <section id="key-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-features">Key Features</h2>
 <ul>
 <li><p><strong>Automated Ticket Scraping</strong></p>
-<p>The tool scrapes relevant data update tickets from our internal ticket system, eliminating the need for manual copy-pasting or sorting.</p></li>
-<li><p><strong>Structured Spreadsheet Interface</strong></p>
-<p>Notes from the tickets are parsed and organized into a centralized spreadsheet using a set of predefined codes, ensuring consistency and readability.</p></li>
+<p>The <a href="./harmony_automation.html">Harmony Automation</a> module streamlines data collection by automatically scraping all comments and notes from tickets in our internal system — no more manual copy-pasting or tedious browser navigation.</p></li>
+<li><p><strong>Structured for Easy Processing</strong></p>
+<p>Scraped ticket data is automatically exported to a spreadsheet for some minor editing to allow the <code>core</code> module to extract structured data from the note.</p>
+<p>For example, the following would be used to update the address, email, and phone number:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="./images/example_ticket_note.png" class="img-fluid figure-img"></p>
+<figcaption>Example</figcaption>
+</figure>
+</div></li>
 <li><p><strong>Integrated Data Enrichment</strong></p>
-<p>The spreadsheet pulls in supplementary data from various sources, including reports from the plan custodian and our internal databases, to ensure comprehensive and accurate updates.</p></li>
-<li><p><strong>One-Click Update Generation</strong></p>
-<p>With a single command, the package generates all necessary files required to update both internal and external databases. This includes:<br>
-- Data files in the correct format<br>
-- Detailed changelogs<br>
-- Full operation logs for traceability</p></li>
-<li><p><strong>Smart Update Targeting</strong></p>
-<p>The package automatically determines whether each update applies to the internal database, the external database, or both. It also distinguishes whether the update pertains to the member or the surviving spouse, ensuring precise routing and formatting of records.</p></li>
+<p>The spreadsheet pulls in additional supplementary data from various sources using Power Query, including reports from CIBC Mellon (the plan custodian) and our internal databases, to support a comprehensive set of features.</p>
+<p>For example, if a member dies, a note will be generated advising of any further entitlements owed. This note would then be added when re-assigning the tickets to the colleague that handles those processes.</p></li>
+<li><p><strong>Automated Data Updates in Seconds</strong></p>
+<p>Transforms raw spreadsheets into standardized Excel files — ready to update internal databases and external systems. Minimizes manual reformatting and reduces processing time from hours to minutes, all while maintaining flawless data consistency.</p>
+<p>For updates to the internal database, the <a href="./update_xl.html">update_xl</a> module also generates detailed, human-readable changelogs showing exactly what changes were made and when.</p></li>
+<li><p><strong>Automated Ticket Closing / Re-assigning</strong></p>
+<p>The <a href="./harmony_automation.html">Harmony Automation</a> module contains functions to automate the closing and re-assigning of tickets, which means no more manually closing and re-assigning tickets and tedious browser navigation/actions.</p>
+<p>This is particularly useful during periods of higher ticket volumes, such as after sending out communications, option forms, etc.</p></li>
 </ul>
 
 

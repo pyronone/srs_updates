@@ -1,51 +1,94 @@
-# srs_updates
+# From Tedious to Effortless
 
 
 <!-- ... -->
 
-Docs:
-[https://pyronone.github.io/srs_updates/](https://pyronone.github.io/srs_updates)
+## Streamlined Data Updates with Python
 
-## Overview
+------------------------------------------------------------------------
 
-This package streamlines and automates the data update workflow for
-Sears, dramatically reducing manual effort and minimizing errors.
-Designed for efficiency and clarity, the package pulls data directly
-from our internal ticketing system, organizes it, enriches it with
-relevant data sources, and outputs fully formatted update files—all at
-the push of a button.
+When I first joined, processing day-to-day data updates for the Sears
+plan was a painfully manual process.
+
+Every month, we’d comb through tickets in Harmony (our internal ticket
+system) one by one, copy-pasting details into a sprawling Excel
+‘database’ and manually cross-referencing and updating a separate
+‘maintenance file’ — a critical file sent monthly to CIBC Mellon to
+update and sync their systems.
+
+The process was so tedious it led to skipped steps and one of my first
+tasks when I joined was actually untangling incongruent data between the
+internal and external databases.
+
+Enter `srs_updates`.
+
+Now, the entire workflow is streamlined and runs like clockwork: Harmony
+tickets are scraped automatically and exported into a spreadsheet for
+quick review and formatting, the database is updated quickly and
+accurately via scripts and macros, and the maintenance files are
+generated automatically with only minor revisions needed at the end.
+
+What once took hours of manual work now runs automatically in minutes
+with near-perfect accuracy.
+
+New features and quality of life improvements are constantly being
+added, with rigorous testing and comprehensive documentation.
+
+And the real beauty is that this solution can easily be adapted for
+other plans.
+
+------------------------------------------------------------------------
 
 ## Key Features
 
 - **Automated Ticket Scraping**
 
-  The tool scrapes relevant data update tickets from our internal ticket
-  system, eliminating the need for manual copy-pasting or sorting.
+  The [Harmony Automation](./11_harmony_automation.ipynb) module
+  streamlines data collection by automatically scraping all comments and
+  notes from tickets in our internal system — no more manual
+  copy-pasting or tedious browser navigation.
 
-- **Structured Spreadsheet Interface**
+- **Structured for Easy Processing**
 
-  Notes from the tickets are parsed and organized into a centralized
-  spreadsheet using a set of predefined codes, ensuring consistency and
-  readability.
+  Scraped ticket data is automatically exported to a spreadsheet for
+  some minor editing to allow the `core` module to extract structured
+  data from the note.
+
+  For example, the following would be used to update the address, email,
+  and phone number:
+
+  ![Example](./images/example_ticket_note.png)
 
 - **Integrated Data Enrichment**
 
-  The spreadsheet pulls in supplementary data from various sources,
-  including reports from the plan custodian and our internal databases,
-  to ensure comprehensive and accurate updates.
+  The spreadsheet pulls in additional supplementary data from various
+  sources using Power Query, including reports from CIBC Mellon (the
+  plan custodian) and our internal databases, to support a comprehensive
+  set of features.
 
-- **One-Click Update Generation**
+  For example, if a member dies, a note will be generated advising of
+  any further entitlements owed. This note would then be added when
+  re-assigning the tickets to the colleague that handles those
+  processes.
 
-  With a single command, the package generates all necessary files
-  required to update both internal and external databases. This
-  includes:  
-  - Data files in the correct format  
-  - Detailed changelogs  
-  - Full operation logs for traceability
+- **Automated Data Updates in Seconds**
 
-- **Smart Update Targeting**
+  Transforms raw spreadsheets into standardized Excel files — ready to
+  update internal databases and external systems. Minimizes manual
+  reformatting and reduces processing time from hours to minutes, all
+  while maintaining flawless data consistency.
 
-  The package automatically determines whether each update applies to
-  the internal database, the external database, or both. It also
-  distinguishes whether the update pertains to the member or the
-  surviving spouse, ensuring precise routing and formatting of records.
+  For updates to the internal database, the
+  [update_xl](./08_update_xl.ipynb) module also generates detailed,
+  human-readable changelogs showing exactly what changes were made and
+  when.
+
+- **Automated Ticket Closing / Re-assigning**
+
+  The [Harmony Automation](./11_harmony_automation.ipynb) module
+  contains functions to automate the closing and re-assigning of
+  tickets, which means no more manually closing and re-assigning tickets
+  and tedious browser navigation/actions.
+
+  This is particularly useful during periods of higher ticket volumes,
+  such as after sending out communications, option forms, etc.

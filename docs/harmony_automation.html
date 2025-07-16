@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Functions and classes specific to Sears and my workflow">
 
-<title>03_srs_specific – srs_updates</title>
+<title>11_harmony_automation – srs_updates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,40 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -104,11 +69,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="03_srs_specific – srs_updates">
-<meta property="og:description" content="Functions and classes specific to Sears and my workflow">
+<meta property="og:title" content="11_harmony_automation – srs_updates">
+<meta property="og:description" content="…">
 <meta property="og:site_name" content="srs_updates">
-<meta name="twitter:title" content="03_srs_specific – srs_updates">
-<meta name="twitter:description" content="Functions and classes specific to Sears and my workflow">
+<meta name="twitter:title" content="11_harmony_automation – srs_updates">
+<meta name="twitter:description" content="…">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -133,7 +98,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./srs_specific.html">03_srs_specific</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./harmony_automation.html">11_harmony_automation</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -165,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./srs_specific.html" class="sidebar-item-text sidebar-link active">
+  <a href="./srs_specific.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03_srs_specific</span></a>
   </div>
 </li>
@@ -183,7 +148,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link">
+  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">11_harmony_automation</span></a>
   </div>
 </li>
@@ -214,27 +179,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#updates" id="toc-updates" class="nav-link active" data-scroll-target="#updates">Updates</a>
+  <li><a href="#helpers" id="toc-helpers" class="nav-link active" data-scroll-target="#helpers">helpers</a>
   <ul class="collapse">
-  <li><a href="#updates-1" id="toc-updates-1" class="nav-link" data-scroll-target="#updates-1">Updates</a></li>
-  <li><a href="#fields" id="toc-fields" class="nav-link" data-scroll-target="#fields">Fields</a></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
-  <ul class="collapse">
-  <li><a href="#post-init" id="toc-post-init" class="nav-link" data-scroll-target="#post-init">post-init</a></li>
-  <li><a href="#updates.processnotesprelim" id="toc-updates.processnotesprelim" class="nav-link" data-scroll-target="#updates.processnotesprelim">Updates.processNotesPrelim</a></li>
-  <li><a href="#updates.filterpinids" id="toc-updates.filterpinids" class="nav-link" data-scroll-target="#updates.filterpinids">Updates.filterPinIDs</a></li>
-  <li><a href="#updates.addassociatedids" id="toc-updates.addassociatedids" class="nav-link" data-scroll-target="#updates.addassociatedids">Updates.addAssociatedIDs</a></li>
-  <li><a href="#updates.determineifsrv" id="toc-updates.determineifsrv" class="nav-link" data-scroll-target="#updates.determineifsrv">Updates.determineIfSrv</a></li>
-  <li><a href="#updates.loadquerydf" id="toc-updates.loadquerydf" class="nav-link" data-scroll-target="#updates.loadquerydf">Updates.loadQueryDF</a></li>
-  <li><a href="#updates.addkeyandtktnum" id="toc-updates.addkeyandtktnum" class="nav-link" data-scroll-target="#updates.addkeyandtktnum">Updates.addKeyAndTktNum</a></li>
-  <li><a href="#updates.processpartialaddresses" id="toc-updates.processpartialaddresses" class="nav-link" data-scroll-target="#updates.processpartialaddresses">Updates.processPartialAddresses</a></li>
-  <li><a href="#updates.getpingroup" id="toc-updates.getpingroup" class="nav-link" data-scroll-target="#updates.getpingroup">Updates.getPinGroup</a></li>
-  <li><a href="#updates.cleancurrstatus" id="toc-updates.cleancurrstatus" class="nav-link" data-scroll-target="#updates.cleancurrstatus">Updates.cleanCurrStatus</a></li>
-  <li><a href="#updates.fixpayeestatus" id="toc-updates.fixpayeestatus" class="nav-link" data-scroll-target="#updates.fixpayeestatus">Updates.fixPayeeStatus</a></li>
-  <li><a href="#updates.pinupdatecheck" id="toc-updates.pinupdatecheck" class="nav-link" data-scroll-target="#updates.pinupdatecheck">Updates.pinUpdateCheck</a></li>
-  <li><a href="#static-methods" id="toc-static-methods" class="nav-link" data-scroll-target="#static-methods">static methods</a></li>
-  <li><a href="#updates.finalpinupdatechk" id="toc-updates.finalpinupdatechk" class="nav-link" data-scroll-target="#updates.finalpinupdatechk">Updates.finalPinUpdateChk</a></li>
+  <li><a href="#appendreassignedtkt2yml" id="toc-appendreassignedtkt2yml" class="nav-link" data-scroll-target="#appendreassignedtkt2yml">appendReassignedTkt2Yml</a></li>
+  <li><a href="#appendclosedtkt2yml" id="toc-appendclosedtkt2yml" class="nav-link" data-scroll-target="#appendclosedtkt2yml">appendClosedTkt2Yml</a></li>
   </ul></li>
+  <li><a href="#playwright" id="toc-playwright" class="nav-link" data-scroll-target="#playwright">Playwright</a>
+  <ul class="collapse">
+  <li><a href="#start_page" id="toc-start_page" class="nav-link" data-scroll-target="#start_page">start_page</a></li>
+  <li><a href="#login" id="toc-login" class="nav-link" data-scroll-target="#login">login</a></li>
+  <li><a href="#search_ticket" id="toc-search_ticket" class="nav-link" data-scroll-target="#search_ticket">search_ticket</a></li>
+  <li><a href="#export_logs" id="toc-export_logs" class="nav-link" data-scroll-target="#export_logs">export_logs</a></li>
+  <li><a href="#scrape_tickets" id="toc-scrape_tickets" class="nav-link" data-scroll-target="#scrape_tickets">scrape_tickets</a></li>
+  <li><a href="#scrape_and_concat" id="toc-scrape_and_concat" class="nav-link" data-scroll-target="#scrape_and_concat">scrape_and_concat</a></li>
+  </ul></li>
+  <li><a href="#automation" id="toc-automation" class="nav-link" data-scroll-target="#automation">automation</a>
+  <ul class="collapse">
+  <li><a href="#close_log" id="toc-close_log" class="nav-link" data-scroll-target="#close_log">close_log</a></li>
+  <li><a href="#reassign_log" id="toc-reassign_log" class="nav-link" data-scroll-target="#reassign_log">reassign_log</a></li>
+  <li><a href="#add_logs" id="toc-add_logs" class="nav-link" data-scroll-target="#add_logs">add_logs</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -244,14 +207,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">03_srs_specific</h1>
+<h1 class="title">11_harmony_automation</h1>
 </div>
 
-<div>
-  <div class="description">
-    Functions and classes specific to Sears and my workflow
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -267,143 +225,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- ... -->
-<section id="updates" class="level1">
-<h1>Updates</h1>
-<ul>
-<li>Class to store and further process UpdateData objects</li>
-</ul>
+<p>As I own the day-to-day data updates process for the Sears plan, there can be &gt;100 tickets to process every few weeks.</p>
+<p>This module uses Microsoft’s <a href="https://playwright.dev/python/">Playwright</a> library to automate scraping, closing, re-assigning, and adding tickets in bulk to our internal ticket system, <em>“Harmony”</em>.</p>
 <hr>
-<section id="updates-1" class="level3">
-<h3 class="anchored" data-anchor-id="updates-1">Updates</h3>
+<section id="helpers" class="level1">
+<h1>helpers</h1>
+<hr>
+<section id="appendreassignedtkt2yml" class="level3">
+<h3 class="anchored" data-anchor-id="appendreassignedtkt2yml">appendReassignedTkt2Yml</h3>
 <blockquote class="blockquote">
-<pre><code> Updates (notes_list:list[str],
-          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,
-          date:str='2025-07-16', rel_pin_ids:list[str]=&lt;factory&gt;,
-          query_df:pandas.core.frame.DataFrame|None=None,
-          test_cml_fp:str|None=None)</code></pre>
+<pre><code> appendReassignedTkt2Yml (t_tkt:str|int, trk_fp:str)</code></pre>
 </blockquote>
-</section>
-<section id="fields" class="level2">
-<h2 class="anchored" data-anchor-id="fields">Fields</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>notes_list: <span class="bu">list</span>[<span class="bu">str</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>all_updates: <span class="bu">list</span>[ud.UpdateData] <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>date: <span class="bu">str</span> <span class="op">=</span> _init_ts()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rel_pin_ids: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>query_df: pd.DataFrame <span class="op">=</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<section id="post-init" class="level3">
-<h3 class="anchored" data-anchor-id="post-init">post-init</h3>
-<ul>
-<li>methods that run after initializing the Updates object</li>
-</ul>
-<hr>
-</section>
-<section id="updates.processnotesprelim" class="level3">
-<h3 class="anchored" data-anchor-id="updates.processnotesprelim">Updates.processNotesPrelim</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.processNotesPrelim ()</code></pre>
-</blockquote>
-<p>*Preliminary processing and conversion of notes into <code>UpdateData</code> objects:</p>
-<ul>
-<li>convert notes into <code>UpdateData</code> objects</li>
-<li>add first name + suffix if there was a death</li>
-<li>create note for re-assigning death-related Harmony logs</li>
-<li>assigns list of <code>UpdateData</code> objects to <code>self.all_updates</code>*</li>
-</ul>
-<hr>
-</section>
-<section id="updates.filterpinids" class="level3">
-<h3 class="anchored" data-anchor-id="updates.filterpinids">Updates.filterPinIDs</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.filterPinIDs ()</code></pre>
-</blockquote>
-<p><em>Filter PIN IDs to speed up <code>addAssociatedIDs</code> method. Assigns filtered list to <code>self.rel_pin_ids</code></em></p>
-<hr>
-</section>
-<section id="updates.addassociatedids" class="level3">
-<h3 class="anchored" data-anchor-id="updates.addassociatedids">Updates.addAssociatedIDs</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.addAssociatedIDs ()</code></pre>
-</blockquote>
-<p><em>For each UpdateData object, add all associated PIN IDs to <code>ud.rel_pin_ids</code>. E.g., <code>S1234567</code>, <code>X1234567</code>, <code>T1234567</code>, <code>1234567</code> would all be associated with a base ID of <code>1234567</code>.</em></p>
-<hr>
-</section>
-<section id="updates.determineifsrv" class="level3">
-<h3 class="anchored" data-anchor-id="updates.determineifsrv">Updates.determineIfSrv</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.determineIfSrv ()</code></pre>
-</blockquote>
-<p><em>Check if SS in pay</em></p>
-<hr>
-</section>
-<section id="updates.loadquerydf" class="level3">
-<h3 class="anchored" data-anchor-id="updates.loadquerydf">Updates.loadQueryDF</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.loadQueryDF ()</code></pre>
-</blockquote>
-<p><em>Loads <code>query</code> tab from CML tracker and assigns to <code>self query_df</code></em></p>
-<hr>
-</section>
-<section id="updates.addkeyandtktnum" class="level3">
-<h3 class="anchored" data-anchor-id="updates.addkeyandtktnum">Updates.addKeyAndTktNum</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.addKeyAndTktNum ()</code></pre>
-</blockquote>
-<p><em>For each UpdateData object, check <code>self query_df</code> for key and ticket number and assign to <code>ud.key</code> and <code>ud.ticket_num</code></em></p>
-<hr>
-</section>
-<section id="updates.processpartialaddresses" class="level3">
-<h3 class="anchored" data-anchor-id="updates.processpartialaddresses">Updates.processPartialAddresses</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.processPartialAddresses ()</code></pre>
-</blockquote>
-<p><em>Handle cases where only partial address update is required. Use <code>[partial]</code> flag to indicate such cases.</em></p>
-<hr>
-</section>
-<section id="updates.getpingroup" class="level3">
-<h3 class="anchored" data-anchor-id="updates.getpingroup">Updates.getPinGroup</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.getPinGroup ()</code></pre>
-</blockquote>
-<p><em>Get payee/PIN group from <code>curr_mbrs</code> sheet for all associated PIN IDs. Append results to <code>ud.pin_group</code> field.</em></p>
-<hr>
-</section>
-<section id="updates.cleancurrstatus" class="level3">
-<h3 class="anchored" data-anchor-id="updates.cleancurrstatus">Updates.cleanCurrStatus</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.cleanCurrStatus ()</code></pre>
-</blockquote>
-<p><em>Clean current status / date of current status based on UpdateData <code>srv</code> field. Clear <code>Current Status</code> and <code>Date of Current Status</code> if only pre-deceased spouse death reported.</em></p>
-<hr>
-</section>
-<section id="updates.fixpayeestatus" class="level3">
-<h3 class="anchored" data-anchor-id="updates.fixpayeestatus">Updates.fixPayeeStatus</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.fixPayeeStatus ()</code></pre>
-</blockquote>
-<p><em>Remove payee status if it’s a spouse death but not SS in PIN.</em></p>
-<hr>
-</section>
-<section id="updates.pinupdatecheck" class="level3">
-<h3 class="anchored" data-anchor-id="updates.pinupdatecheck">Updates.pinUpdateCheck</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.pinUpdateCheck ()</code></pre>
-</blockquote>
-<p><em>Determine which updates s/b included in/excluded from maintenance file</em></p>
-<hr>
-</section>
-<section id="static-methods" class="level3">
-<h3 class="anchored" data-anchor-id="static-methods">static methods</h3>
-<hr>
-</section>
-<section id="updates.finalpinupdatechk" class="level3">
-<h3 class="anchored" data-anchor-id="updates.finalpinupdatechk">Updates.finalPinUpdateChk</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)</code></pre>
-</blockquote>
-<p><em>Determine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.</em></p>
+<p><em>Save to file in case of running over several sessions.</em></p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -414,20 +247,406 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </thead>
 <tbody>
 <tr class="odd">
-<td>_ud</td>
-<td>UpdateData</td>
-<td>ud.UpdateData</td>
+<td>t_tkt</td>
+<td>str | int</td>
+<td>str | int</td>
+</tr>
+<tr class="even">
+<td>trk_fp</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="appendclosedtkt2yml" class="level3">
+<h3 class="anchored" data-anchor-id="appendclosedtkt2yml">appendClosedTkt2Yml</h3>
+<blockquote class="blockquote">
+<pre><code> appendClosedTkt2Yml (t_tkt:str|int, trk_fp:str)</code></pre>
+</blockquote>
+<p><em>Save to file in case of running over several sessions.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>t_tkt</td>
+<td>str | int</td>
+<td>str | int</td>
+</tr>
+<tr class="even">
+<td>trk_fp</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="playwright" class="level1">
+<h1>Playwright</h1>
+<hr>
+<section id="start_page" class="level3">
+<h3 class="anchored" data-anchor-id="start_page">start_page</h3>
+<blockquote class="blockquote">
+<pre><code> start_page ()</code></pre>
+</blockquote>
+<p><em>-&gt; Page</em></p>
+<hr>
+</section>
+<section id="login" class="level3">
+<h3 class="anchored" data-anchor-id="login">login</h3>
+<blockquote class="blockquote">
+<pre><code> login (page:playwright.async_api._generated.Page)</code></pre>
+</blockquote>
+<p><em>-&gt; int</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><strong>Returns</strong></td>
-<td><strong>bool</strong></td>
-<td><strong>False == exclude // True == include</strong></td>
+<td><strong>int</strong></td>
+<td><strong>int - 0 == success</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="search_ticket" class="level3">
+<h3 class="anchored" data-anchor-id="search_ticket">search_ticket</h3>
+<blockquote class="blockquote">
+<pre><code> search_ticket (page:playwright.async_api._generated.Page, tkt:str)</code></pre>
+</blockquote>
+<p><em>Search by ticket #</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>tkt</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td><strong>int - 0 == success</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="export_logs" class="level3">
+<h3 class="anchored" data-anchor-id="export_logs">export_logs</h3>
+<blockquote class="blockquote">
+<pre><code> export_logs (page:playwright.async_api._generated.Page,
+              _out_fp:str='./logs.parquet')</code></pre>
+</blockquote>
+<p><em>Assumes we’re on home page. Gets number of pending tickets, goes to <code>My Logs</code> page, and exports latest 80 tickets to <code>./logs.parquet</code></em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td></td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>_out_fp</td>
+<td>str</td>
+<td>./logs.parquet</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="scrape_tickets" class="level3">
+<h3 class="anchored" data-anchor-id="scrape_tickets">scrape_tickets</h3>
+<blockquote class="blockquote">
+<pre><code> scrape_tickets (page:playwright.async_api._generated.Page,
+                 scrape_df:pandas.core.frame.DataFrame)</code></pre>
+</blockquote>
+<p><em>Go to each ticket that needs scraping and scrape all notes/comments, formatted in chronological order.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>scrape_df</td>
+<td>DataFrame</td>
+<td>pd.DataFrame</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>DataFrame</strong></td>
+<td><strong>pd.DataFrame</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="scrape_and_concat" class="level3">
+<h3 class="anchored" data-anchor-id="scrape_and_concat">scrape_and_concat</h3>
+<blockquote class="blockquote">
+<pre><code> scrape_and_concat (page:playwright.async_api._generated.Page,
+                    existing_dat:pandas.core.frame.DataFrame,
+                    exported_logs:pandas.core.frame.DataFrame,
+                    _out_fp:str='./scrape_concat.parquet')</code></pre>
+</blockquote>
+<p><em>Identify logs that need scraping from exported logs. Run <code>export_logs</code> first. Then scrape and concatenate with existing data/notes. Export to <code>./scrape_concat.parquet</code>.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td></td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>existing_dat</td>
+<td>DataFrame</td>
+<td></td>
+<td>pd.DataFrame</td>
+</tr>
+<tr class="odd">
+<td>exported_logs</td>
+<td>DataFrame</td>
+<td></td>
+<td>pd.DataFrame</td>
+</tr>
+<tr class="even">
+<td>_out_fp</td>
+<td>str</td>
+<td>./scrape_concat.parquet</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="automation" class="level1">
+<h1>automation</h1>
+<hr>
+<section id="close_log" class="level3">
+<h3 class="anchored" data-anchor-id="close_log">close_log</h3>
+<blockquote class="blockquote">
+<pre><code> close_log (page:playwright.async_api._generated.Page, tkt:str,
+            trk_fp:str, note:str='Done')</code></pre>
+</blockquote>
+<p><em>Close individual log.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 6%">
+<col style="width: 25%">
+<col style="width: 34%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td></td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>tkt</td>
+<td>str</td>
+<td></td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td>trk_fp</td>
+<td>str</td>
+<td></td>
+<td>str</td>
+</tr>
+<tr class="even">
+<td>note</td>
+<td>str</td>
+<td>Done</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>int</strong></td>
+<td></td>
+<td><strong>0 - success // 1 - already closed // -1 - error w/ filling resolution</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="reassign_log" class="level3">
+<h3 class="anchored" data-anchor-id="reassign_log">reassign_log</h3>
+<blockquote class="blockquote">
+<pre><code> reassign_log (page:playwright.async_api._generated.Page, tkt:str,
+               trk_fp:str, note:str)</code></pre>
+</blockquote>
+<p><em>Reassign individual log. Edit config to set colleague.</em></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>page</td>
+<td>Page</td>
+<td>Page</td>
+</tr>
+<tr class="even">
+<td>tkt</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td>trk_fp</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="even">
+<td>note</td>
+<td>str</td>
+<td>str</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="add_logs" class="level3">
+<h3 class="anchored" data-anchor-id="add_logs">add_logs</h3>
+<blockquote class="blockquote">
+<pre><code> add_logs (df:pandas.core.frame.DataFrame,
+           page:playwright.async_api._generated.Page)</code></pre>
+</blockquote>
+<p><em>Add logs in bulk.</em></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 9%">
+<col style="width: 38%">
+<col style="width: 52%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th><strong>Type</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>df</td>
+<td>DataFrame</td>
+<td>pd.DataFrame - w/ 2 columns: <code>id</code> (Employee #) and <code>note</code></td>
+</tr>
+<tr class="even">
+<td>page</td>
+<td>Page</td>
+<td>Page</td>
+</tr>
+<tr class="odd">
+<td><strong>Returns</strong></td>
+<td><strong>None</strong></td>
+<td></td>
 </tr>
 </tbody>
 </table>
 
 
-</section>
 </section>
 </section>
 

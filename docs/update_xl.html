@@ -6,6 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="description" content="Module for updating excel ‘database’.">
 
 <title>08_update_xl – srs_updates</title>
 <style>
@@ -70,8 +71,10 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="styles.css">
 <meta property="og:title" content="08_update_xl – srs_updates">
+<meta property="og:description" content="Module for updating excel ‘database’.">
 <meta property="og:site_name" content="srs_updates">
 <meta name="twitter:title" content="08_update_xl – srs_updates">
+<meta name="twitter:description" content="Module for updating excel ‘database’.">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -111,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">srs_updates</span></a>
+ <span class="menu-text">From Tedious to Effortless</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -144,6 +147,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">08_update_xl</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">11_harmony_automation</span></a>
+  </div>
+</li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
@@ -171,7 +180,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#update" id="toc-update" class="nav-link active" data-scroll-target="#update">00 update</a>
+  <li><a href="#key-features" id="toc-key-features" class="nav-link active" data-scroll-target="#key-features">Key Features</a></li>
+  <li><a href="#update" id="toc-update" class="nav-link" data-scroll-target="#update">update</a>
   <ul class="collapse">
   <li><a href="#main-1" id="toc-main-1" class="nav-link" data-scroll-target="#main-1">main</a></li>
   </ul></li>
@@ -186,6 +196,11 @@ ul.task-list li input[type="checkbox"] {
 <h1 class="title">08_update_xl</h1>
 </div>
 
+<div>
+  <div class="description">
+    Module for updating excel ‘database’.
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
@@ -201,11 +216,25 @@ ul.task-list li input[type="checkbox"] {
 
 
 <!-- ... -->
-<blockquote class="blockquote">
-<p>Module for updating address file. Full package/docs can be found <a href="https://pyronone.github.io/update_xl/">here</a>.</p>
-</blockquote>
-<section id="update" class="level1">
-<h1>00 update</h1>
+<hr>
+<p>Despite not being best practice, many teams continue to use Excel as a sort of lightweight ‘database’ due to its accessibility and familiarity.</p>
+<p>This module simplifies the process of updating such ‘databases’, providing a set of features to make data updates more effortless, reliable, and traceable.</p>
+<hr>
+<section id="key-features" class="level2">
+<h2 class="anchored" data-anchor-id="key-features">Key Features</h2>
+<ul>
+<li><p><strong>Simplicity</strong>: Only needing to provide the data that needs to be updated - leave any other fields blank.</p>
+<ul>
+<li>The system automatically retains the original values for empty cells, streamlining the update process by eliminating the need to re-enter unchanged information.</li>
+</ul></li>
+<li><p><strong>Traceable Changes</strong>: Creates a human readable changelog showing exactly what was updated and when.</p></li>
+<li><p><strong>Data Validation</strong>: Comprehensive validation checks to ensure data integrity, such as checking for duplicates, invalid IDs, etc.</p></li>
+<li><p><strong>Append At End</strong>: Ability to append to, instead of overwrite, existing data. Useful for <code>Comments</code> / <code>Notes</code> columns, for instance.</p></li>
+<li><p><strong>Preserve Formatting</strong>: Ability to preserve existing notes and formatting in the original data file.</p></li>
+</ul>
+</section>
+<section id="update" class="level2">
+<h2 class="anchored" data-anchor-id="update">update</h2>
 <hr>
 <section id="main-1" class="level3">
 <h3 class="anchored" data-anchor-id="main-1">main</h3>
@@ -234,7 +263,7 @@ ul.task-list li input[type="checkbox"] {
 <td>key_col</td>
 <td>str</td>
 <td></td>
-<td>unique id column</td>
+<td>Unique id column</td>
 </tr>
 <tr class="even">
 <td>str_cols</td>
@@ -246,13 +275,13 @@ ul.task-list li input[type="checkbox"] {
 <td>input_file</td>
 <td>str</td>
 <td>./Book1.xlsx</td>
-<td>name/path to input file</td>
+<td>Path to input file</td>
 </tr>
 <tr class="even">
 <td>_changelog_dir</td>
 <td>str</td>
 <td>./</td>
-<td>set path for changelog yml output</td>
+<td>Set path for changelog yml output. Default is <code>cwd</code>.</td>
 </tr>
 <tr class="odd">
 <td><strong>Returns</strong></td>
