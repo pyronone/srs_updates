@@ -211,35 +211,41 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="streamlined-data-updates-with-python">Streamlined Data Updates with Python</h2>
 <hr>
 <p>When I first joined, processing day-to-day data updates for the Sears plan was a painfully manual process.</p>
-<p>Every month, we’d comb through tickets in Harmony (our internal ticket system) one by one, copy-pasting details into a sprawling Excel ‘database’ and manually cross-referencing and updating a separate ‘maintenance file’ — a critical file sent monthly to CIBC Mellon to update and sync their systems.</p>
-<p>The process was so tedious it led to skipped steps and one of my first tasks when I joined was actually untangling incongruent data between the internal and external databases.</p>
-<p>Enter <code>srs_updates</code>.</p>
-<p>Now, the entire workflow is streamlined and runs like clockwork: Harmony tickets are scraped automatically and exported into a spreadsheet for quick review and formatting, the database is updated quickly and accurately via scripts and macros, and the maintenance files are generated automatically with only minor revisions needed at the end.</p>
-<p>What once took hours of manual work now runs automatically in minutes with near-perfect accuracy.</p>
+<p>Every month, we’d comb through tickets in Harmony (the internal ticket system) one by one, copy-pasting details into a sprawling Excel ‘database’ and manually cross-referencing and updating a separate ‘maintenance file’ — a critical file sent monthly to CIBC Mellon to update and sync their systems.</p>
+<p>The process was so tedious it led to skipped steps and one of my first tasks when I joined was reconciling incongruent data between the internal and external databases.</p>
+<p>Shortly afterwards, I took ownership of the entire data update process — and transformed it.</p>
+<p><strong>What began as a handful of scripts evolved into a polished, production-ready Python package: meticulously organized, fully documented, and rigorously tested.</strong></p>
+<p>Now, the entire workflow is streamlined in a scalable, maintainable system: Harmony tickets are scraped automatically and exported into a spreadsheet for quick review and formatting, the database is updated quickly and accurately via scripts and macros, and the maintenance files are generated automatically with only minor revisions needed at the end.</p>
+<p><strong>What once took hours of manual work now runs automatically in minutes with near-perfect accuracy.</strong></p>
 <p>New features and quality of life improvements are constantly being added, with rigorous testing and comprehensive documentation.</p>
-<p>And the real beauty is that this solution can easily be adapted for other plans.</p>
+<p>And the real beauty is that <strong>this solution can easily be adapted for other plans</strong>.</p>
 <hr>
 </section>
 <section id="key-features" class="level2">
 <h2 class="anchored" data-anchor-id="key-features">Key Features</h2>
 <ul>
 <li><p><strong>Automated Ticket Scraping</strong></p>
-<p>The <a href="./harmony_automation.html">Harmony Automation</a> module streamlines data collection by automatically scraping all comments and notes from tickets in our internal system — no more manual copy-pasting or tedious browser navigation.</p></li>
-<li><p><strong>Structured for Easy Processing</strong></p>
-<p>Scraped ticket data is automatically exported to a spreadsheet for some minor editing to allow the <code>core</code> module to extract structured data from the note.</p>
-<p>For example, the following would be used to update the address, email, and phone number:</p>
+<p>The <a href="./harmony_automation.html">Harmony Automation</a> module streamlines data collection by automatically scraping all comments and notes from tickets in our internal system — <strong>no more manual copy-pasting or tedious browser navigation</strong>.</p>
+<p>Scraped comments are automatically cleaned, formatted, and sorted chronologically, turning raw text into clear, structured insights.</p></li>
+<li><p><strong>Seamless Data Extraction – Minimal Effort, Maximum Efficiency</strong></p>
+<p>Scraped ticket data lands <strong>automatically in a spreadsheet</strong>, requiring only <strong>light manual tweaks</strong> — just enough to let the <code>core</code> module work its magic. From there, it intelligently <strong>extracts structured data</strong> from notes, transforming messy text into clean, structured data. No tedious preprocessing — just <strong>quick edits, effortless automation</strong>, and ready-to-use data.</p>
+<p>For example, the <code>core</code> module will automatically extract the address, email, and phone number update from the following:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="./images/example_ticket_note.png" class="img-fluid figure-img"></p>
 <figcaption>Example</figcaption>
 </figure>
-</div></li>
+</div>
+<p>You can probably begin to imagine how much time and effort this saves, especially with hundreds of such updates/tickets.</p></li>
 <li><p><strong>Integrated Data Enrichment</strong></p>
-<p>The spreadsheet pulls in additional supplementary data from various sources using Power Query, including reports from CIBC Mellon (the plan custodian) and our internal databases, to support a comprehensive set of features.</p>
-<p>For example, if a member dies, a note will be generated advising of any further entitlements owed. This note would then be added when re-assigning the tickets to the colleague that handles those processes.</p></li>
+<p>The tracking spreadsheet pulls in additional supplementary data from various sources using Power Query, including reports from CIBC Mellon (plan custodian) and our internal databases, to support a comprehensive set of features.</p>
+<p>For example, if a member dies, a note will be generated advising of any further entitlements owed (remaining guarantee period, survivor benefits, etc.). This note is added automatically when re-assigning the tickets to the colleague that handles those processes.</p></li>
+<li><p><strong>Effortless System Synchronization</strong></p>
+<p>Tired of manually tracking which systems need to be updated? This package <strong>automatically determines</strong> where changes should be applied — whether internal, external (plan custodian), or both.</p>
+<p>And the beauty is it’s <strong>fully extendable</strong>, able to handle virtually any update, automatically determining which system is affected and automatically <strong>tweaking the update to meet the requirements of that particular system</strong>. As the package evolves, more features are added, further turning complexity into simplicity.</p></li>
 <li><p><strong>Automated Data Updates in Seconds</strong></p>
-<p>Transforms raw spreadsheets into standardized Excel files — ready to update internal databases and external systems. Minimizes manual reformatting and reduces processing time from hours to minutes, all while maintaining flawless data consistency.</p>
-<p>For updates to the internal database, the <a href="./update_xl.html">update_xl</a> module also generates detailed, human-readable changelogs showing exactly what changes were made and when.</p></li>
+<p>This package transforms raw input spreadsheets into standardized Excel files — ready to update internal databases and external systems. It minimizes the need for manual reformatting and reduces processing time from hours to minutes, all while maintaining flawless data consistency.</p>
+<p>For updates to the internal database, the <a href="./update_xl.html">update_xl</a> module also generates detailed, <strong>human-readable changelogs showing exactly what changes were made and when</strong>.</p></li>
 <li><p><strong>Automated Ticket Closing / Re-assigning</strong></p>
 <p>The <a href="./harmony_automation.html">Harmony Automation</a> module contains functions to automate the closing and re-assigning of tickets, which means no more manually closing and re-assigning tickets and tedious browser navigation/actions.</p>
 <p>This is particularly useful during periods of higher ticket volumes, such as after sending out communications, option forms, etc.</p></li>
