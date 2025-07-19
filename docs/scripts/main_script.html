@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="Functions and classes specific to Sears and my workflow">
 
-<title>03_srs_specific – srs_updates</title>
+<title>Main Script – srs_updates</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -58,22 +57,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -103,12 +102,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
-<meta property="og:title" content="03_srs_specific – srs_updates">
-<meta property="og:description" content="Functions and classes specific to Sears and my workflow">
+<link rel="stylesheet" href="../styles.css">
+<meta property="og:title" content="Main Script – srs_updates">
 <meta property="og:site_name" content="srs_updates">
-<meta name="twitter:title" content="03_srs_specific – srs_updates">
-<meta name="twitter:description" content="Functions and classes specific to Sears and my workflow">
+<meta name="twitter:title" content="Main Script – srs_updates">
 <meta name="twitter:card" content="summary">
 </head>
 
@@ -119,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">srs_updates</span>
     </a>
   </div>
@@ -133,7 +130,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./srs_specific.html">03_srs_specific</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../scripts/main_script.html">scripts</a></li><li class="breadcrumb-item"><a href="../scripts/main_script.html">Main Script</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -147,43 +144,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link">
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">From Tedious to Effortless</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./core.html" class="sidebar-item-text sidebar-link">
+  <a href="../core.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">00_core</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./update_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../update_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">01_update_data</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./srs_specific.html" class="sidebar-item-text sidebar-link active">
+  <a href="../srs_specific.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">03_srs_specific</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./export.html" class="sidebar-item-text sidebar-link">
+  <a href="../export.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">06_export</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./update_xl.html" class="sidebar-item-text sidebar-link">
+  <a href="../update_xl.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">08_update_xl</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./harmony_automation.html" class="sidebar-item-text sidebar-link">
+  <a href="../harmony_automation.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">11_harmony_automation</span></a>
   </div>
 </li>
@@ -198,7 +195,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ref/codes.html" class="sidebar-item-text sidebar-link">
+  <a href="../ref/codes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Codes</span></a>
   </div>
 </li>
@@ -215,13 +212,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts/main_script.html" class="sidebar-item-text sidebar-link">
+  <a href="../scripts/main_script.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Main Script</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./scripts/close_and_reassign_harmony_tickets.html" class="sidebar-item-text sidebar-link">
+  <a href="../scripts/close_and_reassign_harmony_tickets.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Close / Re-assign Harmony Tickets</span></a>
   </div>
 </li>
@@ -237,44 +234,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#updates" id="toc-updates" class="nav-link active" data-scroll-target="#updates">Updates</a>
+  <li><a href="#clone-install-pkg" id="toc-clone-install-pkg" class="nav-link active" data-scroll-target="#clone-install-pkg">clone / install pkg</a></li>
+  <li><a href="#init" id="toc-init" class="nav-link" data-scroll-target="#init">init</a></li>
+  <li><a href="#fxs" id="toc-fxs" class="nav-link" data-scroll-target="#fxs">fxs</a>
   <ul class="collapse">
-  <li><a href="#updates-1" id="toc-updates-1" class="nav-link" data-scroll-target="#updates-1">Updates</a></li>
-  <li><a href="#fields" id="toc-fields" class="nav-link" data-scroll-target="#fields">Fields</a></li>
-  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <li><a href="#loaddat" id="toc-loaddat" class="nav-link" data-scroll-target="#loaddat">loadDat</a></li>
+  <li><a href="#checkcodes" id="toc-checkcodes" class="nav-link" data-scroll-target="#checkcodes">checkCodes</a></li>
+  <li><a href="#checkspousedeaths" id="toc-checkspousedeaths" class="nav-link" data-scroll-target="#checkspousedeaths">checkSpouseDeaths</a></li>
+  <li><a href="#checkmbrdeaths" id="toc-checkmbrdeaths" class="nav-link" data-scroll-target="#checkmbrdeaths">checkMbrDeaths</a></li>
+  </ul></li>
+  <li><a href="#preliminary-checks" id="toc-preliminary-checks" class="nav-link" data-scroll-target="#preliminary-checks">preliminary checks</a>
   <ul class="collapse">
-  <li><a href="#post-init" id="toc-post-init" class="nav-link" data-scroll-target="#post-init">post-init</a></li>
-  <li><a href="#updates.processnotesprelim" id="toc-updates.processnotesprelim" class="nav-link" data-scroll-target="#updates.processnotesprelim">Updates.processNotesPrelim</a></li>
-  <li><a href="#updates.filterpinids" id="toc-updates.filterpinids" class="nav-link" data-scroll-target="#updates.filterpinids">Updates.filterPinIDs</a></li>
-  <li><a href="#updates.addassociatedids" id="toc-updates.addassociatedids" class="nav-link" data-scroll-target="#updates.addassociatedids">Updates.addAssociatedIDs</a></li>
-  <li><a href="#updates.determineifsrv" id="toc-updates.determineifsrv" class="nav-link" data-scroll-target="#updates.determineifsrv">Updates.determineIfSrv</a></li>
-  <li><a href="#updates.loadquerydf" id="toc-updates.loadquerydf" class="nav-link" data-scroll-target="#updates.loadquerydf">Updates.loadQueryDF</a></li>
-  <li><a href="#updates.addkeyandtktnum" id="toc-updates.addkeyandtktnum" class="nav-link" data-scroll-target="#updates.addkeyandtktnum">Updates.addKeyAndTktNum</a></li>
-  <li><a href="#updates.processpartialaddresses" id="toc-updates.processpartialaddresses" class="nav-link" data-scroll-target="#updates.processpartialaddresses">Updates.processPartialAddresses</a></li>
-  <li><a href="#updates.getpingroup" id="toc-updates.getpingroup" class="nav-link" data-scroll-target="#updates.getpingroup">Updates.getPinGroup</a></li>
-  <li><a href="#updates.cleancurrstatus" id="toc-updates.cleancurrstatus" class="nav-link" data-scroll-target="#updates.cleancurrstatus">Updates.cleanCurrStatus</a></li>
-  <li><a href="#updates.fixpayeestatus" id="toc-updates.fixpayeestatus" class="nav-link" data-scroll-target="#updates.fixpayeestatus">Updates.fixPayeeStatus</a></li>
-  <li><a href="#updates.pinupdatecheck" id="toc-updates.pinupdatecheck" class="nav-link" data-scroll-target="#updates.pinupdatecheck">Updates.pinUpdateCheck</a></li>
-  <li><a href="#static-methods" id="toc-static-methods" class="nav-link" data-scroll-target="#static-methods">static methods</a></li>
-  <li><a href="#updates.finalpinupdatechk" id="toc-updates.finalpinupdatechk" class="nav-link" data-scroll-target="#updates.finalpinupdatechk">Updates.finalPinUpdateChk</a></li>
+  <li><a href="#load-dat" id="toc-load-dat" class="nav-link" data-scroll-target="#load-dat">load dat</a></li>
+  <li><a href="#check-if-rbp-and-id-is-in-database" id="toc-check-if-rbp-and-id-is-in-database" class="nav-link" data-scroll-target="#check-if-rbp-and-id-is-in-database">check if RBP and ID is in database</a></li>
+  <li><a href="#check-codes" id="toc-check-codes" class="nav-link" data-scroll-target="#check-codes">check codes</a></li>
+  <li><a href="#check-deaths" id="toc-check-deaths" class="nav-link" data-scroll-target="#check-deaths">check deaths</a></li>
   </ul></li>
-  </ul></li>
+  <li><a href="#export-files" id="toc-export-files" class="nav-link" data-scroll-target="#export-files">export files</a></li>
+  <li><a href="#generate-update-files-for-internal-update" id="toc-generate-update-files-for-internal-update" class="nav-link" data-scroll-target="#generate-update-files-for-internal-update">generate update files for internal update</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../scripts/main_script.html">scripts</a></li><li class="breadcrumb-item"><a href="../scripts/main_script.html">Main Script</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">03_srs_specific</h1>
+<h1 class="title">Main Script</h1>
 </div>
 
-<div>
-  <div class="description">
-    Functions and classes specific to Sears and my workflow
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -290,168 +278,138 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <!-- ... -->
-<section id="updates" class="level1">
-<h1>Updates</h1>
+<section id="clone-install-pkg" class="level2">
+<h2 class="anchored" data-anchor-id="clone-install-pkg">clone / install pkg</h2>
+<div id="cell-3" class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>git clone https:<span class="op">//</span>github_pat_...<span class="op">@</span>github.com<span class="op">/</span>...<span class="op">/</span>srs_updates.git</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<pre><code>%cd './srs_updates'
+!pip install -e ".[dev]"</code></pre>
+</section>
+<section id="init" class="level2">
+<h2 class="anchored" data-anchor-id="init">init</h2>
+<div id="cell-6" class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> re</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> loguru <span class="im">import</span> logger <span class="im">as</span> lg</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> srs_updates <span class="im">import</span> srs_specific <span class="im">as</span> ss</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> srs_updates <span class="im">import</span> update_xl <span class="im">as</span> uxl</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> srs_updates.core <span class="im">import</span> loadSerializedLog</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> srs_updates.export <span class="im">import</span> exportFiles</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fxs" class="level2">
+<h2 class="anchored" data-anchor-id="fxs">fxs</h2>
+<hr>
+<section id="loaddat" class="level3">
+<h3 class="anchored" data-anchor-id="loaddat">loadDat</h3>
+<blockquote class="blockquote">
+<pre><code> loadDat ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="checkcodes" class="level3">
+<h3 class="anchored" data-anchor-id="checkcodes">checkCodes</h3>
+<blockquote class="blockquote">
+<pre><code> checkCodes ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="checkspousedeaths" class="level3">
+<h3 class="anchored" data-anchor-id="checkspousedeaths">checkSpouseDeaths</h3>
+<blockquote class="blockquote">
+<pre><code> checkSpouseDeaths ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="checkmbrdeaths" class="level3">
+<h3 class="anchored" data-anchor-id="checkmbrdeaths">checkMbrDeaths</h3>
+<blockquote class="blockquote">
+<pre><code> checkMbrDeaths ()</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="preliminary-checks" class="level2">
+<h2 class="anchored" data-anchor-id="preliminary-checks">preliminary checks</h2>
+<section id="load-dat" class="level3">
+<h3 class="anchored" data-anchor-id="load-dat">load dat</h3>
+<div id="cell-14" class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>loadDat()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-if-rbp-and-id-is-in-database" class="level3">
+<h3 class="anchored" data-anchor-id="check-if-rbp-and-id-is-in-database">check if RBP and ID is in database</h3>
+<div id="cell-16" class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># warn if not in address file</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>chk <span class="op">=</span> af[[<span class="st">"Emp ID #1"</span>, <span class="st">"Updated"</span>]].copy()</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>ids <span class="op">=</span> df[<span class="st">"Emp ID #1"</span>].tolist()</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> chk[<span class="st">"Emp ID #1"</span>].isin(ids)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>chk <span class="op">=</span> chk[m].copy()</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _id <span class="kw">in</span> ids:</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> _id <span class="kw">not</span> <span class="kw">in</span> chk[<span class="st">"Emp ID #1"</span>].tolist():</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>        lg.warning(<span class="ss">f"</span><span class="sc">{</span>_id<span class="sc">}</span><span class="ss"> not in address file"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># warn if currently flagged as RBP</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>chk.columns <span class="op">=</span> [<span class="st">"id"</span>, <span class="st">"updated"</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>chk.updated <span class="op">=</span> chk.updated.fillna(<span class="st">"1-jan-2017"</span>)  <span class="co"># placeholder</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>chk[<span class="st">"updated"</span>] <span class="op">=</span> pd.to_datetime(chk[<span class="st">"updated"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>m <span class="op">=</span> chk[<span class="st">"updated"</span>].isna()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> _id <span class="kw">in</span> chk[m][<span class="st">"id"</span>].tolist():</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    lg.warning(<span class="ss">f"</span><span class="sc">{</span>_id<span class="sc">}</span><span class="ss"> currently flagged as RBP in address file"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-codes" class="level3">
+<h3 class="anchored" data-anchor-id="check-codes">check codes</h3>
+<div id="cell-19" class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>checkCodes()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="check-deaths" class="level3">
+<h3 class="anchored" data-anchor-id="check-deaths">check deaths</h3>
+<p>For spouse death, ensure name is provided (either in note, or already in database). Also check if we already have a DOD in the database.</p>
+<div id="cell-22" class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>checkSpouseDeaths()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>For member death, check if we already have DOD in the database.</p>
+<div id="cell-24" class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>checkMbrDeaths()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="export-files" class="level2">
+<h2 class="anchored" data-anchor-id="export-files">export files</h2>
+<div id="cell-26" class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>notes_list <span class="op">=</span> df.full_note.tolist()</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(notes_list)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-27" class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>updates <span class="op">=</span> ss.Updates(notes_list<span class="op">=</span>notes_list)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>exportFiles(updates)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="cell-28" class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># export log to double check warnings</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>_log <span class="op">=</span> loadSerializedLog(<span class="st">"./updates.log"</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>_log.to_excel(<span class="st">"_log.xlsx"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="generate-update-files-for-internal-update" class="level2">
+<h2 class="anchored" data-anchor-id="generate-update-files-for-internal-update">generate update files for internal update</h2>
 <ul>
-<li>Class to store and further process UpdateData objects</li>
+<li>includes changelog</li>
 </ul>
-<hr>
-<section id="updates-1" class="level3">
-<h3 class="anchored" data-anchor-id="updates-1">Updates</h3>
-<blockquote class="blockquote">
-<pre><code> Updates (notes_list:list[str],
-          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,
-          date:str='2025-07-19', rel_pin_ids:list[str]=&lt;factory&gt;,
-          query_df:pandas.core.frame.DataFrame|None=None,
-          test_cml_fp:str|None=None)</code></pre>
-</blockquote>
-</section>
-<section id="fields" class="level2">
-<h2 class="anchored" data-anchor-id="fields">Fields</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode py code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>notes_list: <span class="bu">list</span>[<span class="bu">str</span>]</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>all_updates: <span class="bu">list</span>[ud.UpdateData] <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>date: <span class="bu">str</span> <span class="op">=</span> _init_ts()</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>rel_pin_ids: <span class="bu">list</span>[<span class="bu">str</span>] <span class="op">=</span> field(default_factory<span class="op">=</span>_default_empty_list)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>query_df: pd.DataFrame <span class="op">=</span> <span class="va">None</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="methods" class="level2">
-<h2 class="anchored" data-anchor-id="methods">Methods</h2>
-<section id="post-init" class="level3">
-<h3 class="anchored" data-anchor-id="post-init">post-init</h3>
-<ul>
-<li>methods that run after initializing the Updates object</li>
-</ul>
-<hr>
-</section>
-<section id="updates.processnotesprelim" class="level3">
-<h3 class="anchored" data-anchor-id="updates.processnotesprelim">Updates.processNotesPrelim</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.processNotesPrelim ()</code></pre>
-</blockquote>
-<p>*Preliminary processing and conversion of notes into <code>UpdateData</code> objects:</p>
-<ul>
-<li>convert notes into <code>UpdateData</code> objects</li>
-<li>add first name + suffix if there was a death</li>
-<li>create note for re-assigning death-related Harmony logs</li>
-<li>assigns list of <code>UpdateData</code> objects to <code>self.all_updates</code>*</li>
-</ul>
-<hr>
-</section>
-<section id="updates.filterpinids" class="level3">
-<h3 class="anchored" data-anchor-id="updates.filterpinids">Updates.filterPinIDs</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.filterPinIDs ()</code></pre>
-</blockquote>
-<p><em>Filter PIN IDs to speed up <code>addAssociatedIDs</code> method. Assigns filtered list to <code>self.rel_pin_ids</code></em></p>
-<hr>
-</section>
-<section id="updates.addassociatedids" class="level3">
-<h3 class="anchored" data-anchor-id="updates.addassociatedids">Updates.addAssociatedIDs</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.addAssociatedIDs ()</code></pre>
-</blockquote>
-<p><em>For each UpdateData object, add all associated PIN IDs to <code>ud.rel_pin_ids</code>. E.g., <code>S1234567</code>, <code>X1234567</code>, <code>T1234567</code>, <code>1234567</code> would all be associated with a base ID of <code>1234567</code>.</em></p>
-<hr>
-</section>
-<section id="updates.determineifsrv" class="level3">
-<h3 class="anchored" data-anchor-id="updates.determineifsrv">Updates.determineIfSrv</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.determineIfSrv ()</code></pre>
-</blockquote>
-<p><em>Check if SS in pay</em></p>
-<hr>
-</section>
-<section id="updates.loadquerydf" class="level3">
-<h3 class="anchored" data-anchor-id="updates.loadquerydf">Updates.loadQueryDF</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.loadQueryDF ()</code></pre>
-</blockquote>
-<p><em>Loads <code>query</code> tab from CML tracker and assigns to <code>self query_df</code></em></p>
-<hr>
-</section>
-<section id="updates.addkeyandtktnum" class="level3">
-<h3 class="anchored" data-anchor-id="updates.addkeyandtktnum">Updates.addKeyAndTktNum</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.addKeyAndTktNum ()</code></pre>
-</blockquote>
-<p><em>For each UpdateData object, check <code>self query_df</code> for key and ticket number and assign to <code>ud.key</code> and <code>ud.ticket_num</code></em></p>
-<hr>
-</section>
-<section id="updates.processpartialaddresses" class="level3">
-<h3 class="anchored" data-anchor-id="updates.processpartialaddresses">Updates.processPartialAddresses</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.processPartialAddresses ()</code></pre>
-</blockquote>
-<p><em>Handle cases where only partial address update is required. Use <code>[partial]</code> flag to indicate such cases.</em></p>
-<hr>
-</section>
-<section id="updates.getpingroup" class="level3">
-<h3 class="anchored" data-anchor-id="updates.getpingroup">Updates.getPinGroup</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.getPinGroup ()</code></pre>
-</blockquote>
-<p><em>Get payee/PIN group from <code>curr_mbrs</code> sheet for all associated PIN IDs. Append results to <code>ud.pin_group</code> field.</em></p>
-<hr>
-</section>
-<section id="updates.cleancurrstatus" class="level3">
-<h3 class="anchored" data-anchor-id="updates.cleancurrstatus">Updates.cleanCurrStatus</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.cleanCurrStatus ()</code></pre>
-</blockquote>
-<p><em>Clean current status / date of current status based on UpdateData <code>srv</code> field. Clear <code>Current Status</code> and <code>Date of Current Status</code> if only pre-deceased spouse death reported.</em></p>
-<hr>
-</section>
-<section id="updates.fixpayeestatus" class="level3">
-<h3 class="anchored" data-anchor-id="updates.fixpayeestatus">Updates.fixPayeeStatus</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.fixPayeeStatus ()</code></pre>
-</blockquote>
-<p><em>Remove payee status if it’s a spouse death but not SS in PIN.</em></p>
-<hr>
-</section>
-<section id="updates.pinupdatecheck" class="level3">
-<h3 class="anchored" data-anchor-id="updates.pinupdatecheck">Updates.pinUpdateCheck</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.pinUpdateCheck ()</code></pre>
-</blockquote>
-<p><em>Determine which updates s/b included in/excluded from maintenance file</em></p>
-<hr>
-</section>
-<section id="static-methods" class="level3">
-<h3 class="anchored" data-anchor-id="static-methods">static methods</h3>
-<hr>
-</section>
-<section id="updates.finalpinupdatechk" class="level3">
-<h3 class="anchored" data-anchor-id="updates.finalpinupdatechk">Updates.finalPinUpdateChk</h3>
-<blockquote class="blockquote">
-<pre><code> Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)</code></pre>
-</blockquote>
-<p><em>Determine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.</em></p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th></th>
-<th><strong>Type</strong></th>
-<th><strong>Details</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>_ud</td>
-<td>UpdateData</td>
-<td>ud.UpdateData</td>
-</tr>
-<tr class="even">
-<td><strong>Returns</strong></td>
-<td><strong>bool</strong></td>
-<td><strong>False == exclude // True == include</strong></td>
-</tr>
-</tbody>
-</table>
+<div id="cell-30" class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-overflow-wrap code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>uxl.main(</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Emp ID #1"</span>, [<span class="st">"Postal"</span>, <span class="st">"Bene/MB/Alt. Postal Code"</span>, <span class="st">"Spouse's SIN"</span>], <span class="st">"Book1.xlsx"</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
-</section>
-</section>
 </section>
 
 </main> <!-- /main -->

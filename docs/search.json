@@ -1,5 +1,82 @@
 [
   {
+    "objectID": "scripts/main_script.html",
+    "href": "scripts/main_script.html",
+    "title": "Main Script",
+    "section": "",
+    "text": "!git clone https://github_pat_...@github.com/.../srs_updates.git\n\n%cd './srs_updates'\n!pip install -e \".[dev]\"",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#clone-install-pkg",
+    "href": "scripts/main_script.html#clone-install-pkg",
+    "title": "Main Script",
+    "section": "",
+    "text": "!git clone https://github_pat_...@github.com/.../srs_updates.git\n\n%cd './srs_updates'\n!pip install -e \".[dev]\"",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#init",
+    "href": "scripts/main_script.html#init",
+    "title": "Main Script",
+    "section": "init",
+    "text": "init\n\nimport re\n\nimport pandas as pd\nfrom loguru import logger as lg\n\nfrom srs_updates import srs_specific as ss\nfrom srs_updates import update_xl as uxl\nfrom srs_updates.core import loadSerializedLog\nfrom srs_updates.export import exportFiles",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#fxs",
+    "href": "scripts/main_script.html#fxs",
+    "title": "Main Script",
+    "section": "fxs",
+    "text": "fxs\n\n\nloadDat\n\n loadDat ()\n\n\n\n\ncheckCodes\n\n checkCodes ()\n\n\n\n\ncheckSpouseDeaths\n\n checkSpouseDeaths ()\n\n\n\n\ncheckMbrDeaths\n\n checkMbrDeaths ()",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#preliminary-checks",
+    "href": "scripts/main_script.html#preliminary-checks",
+    "title": "Main Script",
+    "section": "preliminary checks",
+    "text": "preliminary checks\n\nload dat\n\nloadDat()\n\n\n\ncheck if RBP and ID is in database\n\n# warn if not in address file\nchk = af[[\"Emp ID #1\", \"Updated\"]].copy()\nids = df[\"Emp ID #1\"].tolist()\n\nm = chk[\"Emp ID #1\"].isin(ids)\nchk = chk[m].copy()\n\nfor _id in ids:\n    if _id not in chk[\"Emp ID #1\"].tolist():\n        lg.warning(f\"{_id} not in address file\")\n\n\n# warn if currently flagged as RBP\nchk.columns = [\"id\", \"updated\"]\n\nchk.updated = chk.updated.fillna(\"1-jan-2017\")  # placeholder\nchk[\"updated\"] = pd.to_datetime(chk[\"updated\"], errors=\"coerce\")\nm = chk[\"updated\"].isna()\nfor _id in chk[m][\"id\"].tolist():\n    lg.warning(f\"{_id} currently flagged as RBP in address file\")\n\n\n\ncheck codes\n\ncheckCodes()\n\n\n\ncheck deaths\nFor spouse death, ensure name is provided (either in note, or already in database). Also check if we already have a DOD in the database.\n\ncheckSpouseDeaths()\n\nFor member death, check if we already have DOD in the database.\n\ncheckMbrDeaths()",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#export-files",
+    "href": "scripts/main_script.html#export-files",
+    "title": "Main Script",
+    "section": "export files",
+    "text": "export files\n\nnotes_list = df.full_note.tolist()\nlen(notes_list)\n\n\nupdates = ss.Updates(notes_list=notes_list)\nexportFiles(updates)\n\n\n# export log to double check warnings\n_log = loadSerializedLog(\"./updates.log\")\n_log.to_excel(\"_log.xlsx\", index=False)",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
+    "objectID": "scripts/main_script.html#generate-update-files-for-internal-update",
+    "href": "scripts/main_script.html#generate-update-files-for-internal-update",
+    "title": "Main Script",
+    "section": "generate update files for internal update",
+    "text": "generate update files for internal update\n\nincludes changelog\n\n\nuxl.main(\n    \"Emp ID #1\", [\"Postal\", \"Bene/MB/Alt. Postal Code\", \"Spouse's SIN\"], \"Book1.xlsx\"\n)",
+    "crumbs": [
+      "scripts",
+      "Main Script"
+    ]
+  },
+  {
     "objectID": "ref/codes.html",
     "href": "ref/codes.html",
     "title": "Codes",
@@ -85,7 +162,7 @@
     "href": "srs_specific.html",
     "title": "03_srs_specific",
     "section": "",
-    "text": "Class to store and further process UpdateData objects\n\n\n\n\n\n Updates (notes_list:list[str],\n          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,\n          date:str='2025-07-17', rel_pin_ids:list[str]=&lt;factory&gt;,\n          query_df:pandas.core.frame.DataFrame|None=None,\n          test_cml_fp:str|None=None)\n\n\n\n\nnotes_list: list[str]\nall_updates: list[ud.UpdateData] = field(default_factory=_default_empty_list)\ndate: str = _init_ts()\nrel_pin_ids: list[str] = field(default_factory=_default_empty_list)\nquery_df: pd.DataFrame = None\n\n\n\n\n\n\nmethods that run after initializing the Updates object\n\n\n\n\n\n\n Updates.processNotesPrelim ()\n\n*Preliminary processing and conversion of notes into UpdateData objects:\n\nconvert notes into UpdateData objects\nadd first name + suffix if there was a death\ncreate note for re-assigning death-related Harmony logs\nassigns list of UpdateData objects to self.all_updates*\n\n\n\n\n\n\n Updates.filterPinIDs ()\n\nFilter PIN IDs to speed up addAssociatedIDs method. Assigns filtered list to self.rel_pin_ids\n\n\n\n\n\n Updates.addAssociatedIDs ()\n\nFor each UpdateData object, add all associated PIN IDs to ud.rel_pin_ids. E.g., S1234567, X1234567, T1234567, 1234567 would all be associated with a base ID of 1234567.\n\n\n\n\n\n Updates.determineIfSrv ()\n\nCheck if SS in pay\n\n\n\n\n\n Updates.loadQueryDF ()\n\nLoads query tab from CML tracker and assigns to self query_df\n\n\n\n\n\n Updates.addKeyAndTktNum ()\n\nFor each UpdateData object, check self query_df for key and ticket number and assign to ud.key and ud.ticket_num\n\n\n\n\n\n Updates.processPartialAddresses ()\n\nHandle cases where only partial address update is required. Use [partial] flag to indicate such cases.\n\n\n\n\n\n Updates.getPinGroup ()\n\nGet payee/PIN group from curr_mbrs sheet for all associated PIN IDs. Append results to ud.pin_group field.\n\n\n\n\n\n Updates.cleanCurrStatus ()\n\nClean current status / date of current status based on UpdateData srv field. Clear Current Status and Date of Current Status if only pre-deceased spouse death reported.\n\n\n\n\n\n Updates.fixPayeeStatus ()\n\nRemove payee status if it’s a spouse death but not SS in PIN.\n\n\n\n\n\n Updates.pinUpdateCheck ()\n\nDetermine which updates s/b included in/excluded from maintenance file\n\n\n\n\n\n\n\n\n\n Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)\n\nDetermine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.\n\n\n\n\nType\nDetails\n\n\n\n\n_ud\nUpdateData\nud.UpdateData\n\n\nReturns\nbool\nFalse == exclude // True == include",
+    "text": "Class to store and further process UpdateData objects\n\n\n\n\n\n Updates (notes_list:list[str],\n          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,\n          date:str='2025-07-19', rel_pin_ids:list[str]=&lt;factory&gt;,\n          query_df:pandas.core.frame.DataFrame|None=None,\n          test_cml_fp:str|None=None)\n\n\n\n\nnotes_list: list[str]\nall_updates: list[ud.UpdateData] = field(default_factory=_default_empty_list)\ndate: str = _init_ts()\nrel_pin_ids: list[str] = field(default_factory=_default_empty_list)\nquery_df: pd.DataFrame = None\n\n\n\n\n\n\nmethods that run after initializing the Updates object\n\n\n\n\n\n\n Updates.processNotesPrelim ()\n\n*Preliminary processing and conversion of notes into UpdateData objects:\n\nconvert notes into UpdateData objects\nadd first name + suffix if there was a death\ncreate note for re-assigning death-related Harmony logs\nassigns list of UpdateData objects to self.all_updates*\n\n\n\n\n\n\n Updates.filterPinIDs ()\n\nFilter PIN IDs to speed up addAssociatedIDs method. Assigns filtered list to self.rel_pin_ids\n\n\n\n\n\n Updates.addAssociatedIDs ()\n\nFor each UpdateData object, add all associated PIN IDs to ud.rel_pin_ids. E.g., S1234567, X1234567, T1234567, 1234567 would all be associated with a base ID of 1234567.\n\n\n\n\n\n Updates.determineIfSrv ()\n\nCheck if SS in pay\n\n\n\n\n\n Updates.loadQueryDF ()\n\nLoads query tab from CML tracker and assigns to self query_df\n\n\n\n\n\n Updates.addKeyAndTktNum ()\n\nFor each UpdateData object, check self query_df for key and ticket number and assign to ud.key and ud.ticket_num\n\n\n\n\n\n Updates.processPartialAddresses ()\n\nHandle cases where only partial address update is required. Use [partial] flag to indicate such cases.\n\n\n\n\n\n Updates.getPinGroup ()\n\nGet payee/PIN group from curr_mbrs sheet for all associated PIN IDs. Append results to ud.pin_group field.\n\n\n\n\n\n Updates.cleanCurrStatus ()\n\nClean current status / date of current status based on UpdateData srv field. Clear Current Status and Date of Current Status if only pre-deceased spouse death reported.\n\n\n\n\n\n Updates.fixPayeeStatus ()\n\nRemove payee status if it’s a spouse death but not SS in PIN.\n\n\n\n\n\n Updates.pinUpdateCheck ()\n\nDetermine which updates s/b included in/excluded from maintenance file\n\n\n\n\n\n\n\n\n\n Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)\n\nDetermine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.\n\n\n\n\nType\nDetails\n\n\n\n\n_ud\nUpdateData\nud.UpdateData\n\n\nReturns\nbool\nFalse == exclude // True == include",
     "crumbs": [
       "03_srs_specific"
     ]
@@ -168,6 +245,61 @@
     "text": "Key Features\n\nAutomated Ticket Scraping\nThe Harmony Automation module streamlines data collection by automatically scraping all comments and notes from tickets in our internal system — no more manual copy-pasting or tedious browser navigation.\nScraped comments are automatically cleaned, formatted, and sorted chronologically, turning raw text into clear, structured insights.\nSeamless Data Extraction – Minimal Effort, Maximum Efficiency\nScraped ticket data lands automatically in a spreadsheet, requiring only light manual tweaks — just enough to let the core module work its magic. From there, it intelligently extracts structured data from notes, transforming messy text into clean, structured data. No tedious preprocessing — just quick edits, effortless automation, and ready-to-use data.\nFor example, the core module will automatically extract the address, email, and phone number update from the following:\n\n\n\nExample\n\n\nYou can probably begin to imagine how much time and effort this saves, especially with hundreds of such updates/tickets.\nIntegrated Data Enrichment\nThe tracking spreadsheet pulls in additional supplementary data from various sources using Power Query, including reports from CIBC Mellon (plan custodian) and our internal databases, to support a comprehensive set of features.\nFor example, if a member dies, a note will be generated advising of any further entitlements owed (remaining guarantee period, survivor benefits, etc.). This note is added automatically when re-assigning the tickets to the colleague that handles those processes.\nEffortless System Synchronization\nTired of manually tracking which systems need to be updated? This package automatically determines where changes should be applied — whether internal, external (plan custodian), or both.\nAnd the beauty is it’s fully extendable, able to handle virtually any update, automatically determining which system is affected and automatically tweaking the update to meet the requirements of that particular system. As the package evolves, more features are added, further turning complexity into simplicity.\nAutomated Data Updates in Seconds\nThis package transforms raw input spreadsheets into standardized Excel files — ready to update internal databases and external systems. It minimizes the need for manual reformatting and reduces processing time from hours to minutes, all while maintaining flawless data consistency.\nFor updates to the internal database, the update_xl module also generates detailed, human-readable changelogs showing exactly what changes were made and when.\nAutomated Ticket Closing / Re-assigning\nThe Harmony Automation module contains functions to automate the closing and re-assigning of tickets, which means no more manually closing and re-assigning tickets and tedious browser navigation/actions.\nThis is particularly useful during periods of higher ticket volumes, such as after sending out communications, option forms, etc.",
     "crumbs": [
       "From Tedious to Effortless"
+    ]
+  },
+  {
+    "objectID": "scripts/close_and_reassign_harmony_tickets.html",
+    "href": "scripts/close_and_reassign_harmony_tickets.html",
+    "title": "Close / Re-assign Harmony Tickets",
+    "section": "",
+    "text": "import os\nimport sys\nfrom pathlib import Path\n\nimport pandas as pd\nfrom loguru import logger as lg\nfrom pandas import DataFrame\nfrom pandas.core.frame import DataFrame\n\nfrom srs_updates import harmony_automation as ha\nfrom srs_updates.core import fp, yaml_helper\n\npage = await ha.start_page()\n\n\nawait ha.login(page)",
+    "crumbs": [
+      "scripts",
+      "Close / Re-assign Harmony Tickets"
+    ]
+  },
+  {
+    "objectID": "scripts/close_and_reassign_harmony_tickets.html#init",
+    "href": "scripts/close_and_reassign_harmony_tickets.html#init",
+    "title": "Close / Re-assign Harmony Tickets",
+    "section": "",
+    "text": "import os\nimport sys\nfrom pathlib import Path\n\nimport pandas as pd\nfrom loguru import logger as lg\nfrom pandas import DataFrame\nfrom pandas.core.frame import DataFrame\n\nfrom srs_updates import harmony_automation as ha\nfrom srs_updates.core import fp, yaml_helper\n\npage = await ha.start_page()\n\n\nawait ha.login(page)",
+    "crumbs": [
+      "scripts",
+      "Close / Re-assign Harmony Tickets"
+    ]
+  },
+  {
+    "objectID": "scripts/close_and_reassign_harmony_tickets.html#fxs",
+    "href": "scripts/close_and_reassign_harmony_tickets.html#fxs",
+    "title": "Close / Re-assign Harmony Tickets",
+    "section": "fxs",
+    "text": "fxs\n\n\nloadTktData\n\n loadTktData ()\n\n-&gt; tuple[DataFrame, str]",
+    "crumbs": [
+      "scripts",
+      "Close / Re-assign Harmony Tickets"
+    ]
+  },
+  {
+    "objectID": "scripts/close_and_reassign_harmony_tickets.html#load-data",
+    "href": "scripts/close_and_reassign_harmony_tickets.html#load-data",
+    "title": "Close / Re-assign Harmony Tickets",
+    "section": "load data",
+    "text": "load data\n\ndf, latest = loadTktData()\nm = df[\"log_action\"].str.strip() == \"N\"\nCLOSE = df[m].copy()\nREASSIGN = df[~m].copy()\n\n\nsys.exit(0)",
+    "crumbs": [
+      "scripts",
+      "Close / Re-assign Harmony Tickets"
+    ]
+  },
+  {
+    "objectID": "scripts/close_and_reassign_harmony_tickets.html#close",
+    "href": "scripts/close_and_reassign_harmony_tickets.html#close",
+    "title": "Close / Re-assign Harmony Tickets",
+    "section": "close",
+    "text": "close\n\ntry:\n    test = yaml_helper(latest, \"r\")\n    already_closed: list[str] = test[\"closed\"]\nexcept:\n    already_closed = []\n\nfor i in range(len(CLOSE)):\n    tkt = str(CLOSE.iloc[i, 0])\n    if tkt not in already_closed:\n        await ha.close_log(page, tkt, trk_fp=latest, note=\"Done\")\n\n\nx, y = len(set(yaml_helper(latest, \"r\")[\"closed\"])), len(CLOSE)\nprint(x, y)\n\n\nsys.exit(0)",
+    "crumbs": [
+      "scripts",
+      "Close / Re-assign Harmony Tickets"
     ]
   }
 ]
