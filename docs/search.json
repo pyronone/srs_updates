@@ -6,7 +6,7 @@
     "section": "",
     "text": "!git clone https://github_pat_...@github.com/.../srs_updates.git\n\n%cd './srs_updates'\n!pip install -e \".[dev]\"",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -17,7 +17,7 @@
     "section": "",
     "text": "!git clone https://github_pat_...@github.com/.../srs_updates.git\n\n%cd './srs_updates'\n!pip install -e \".[dev]\"",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -28,7 +28,7 @@
     "section": "init",
     "text": "init\n\nimport re\n\nimport pandas as pd\nfrom loguru import logger as lg\n\nfrom srs_updates import srs_specific as ss\nfrom srs_updates import update_xl as uxl\nfrom srs_updates.core import loadSerializedLog\nfrom srs_updates.export import exportFiles",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -39,7 +39,7 @@
     "section": "fxs",
     "text": "fxs\n\n\nloadDat\n\n loadDat ()\n\n\n\n\ncheckCodes\n\n checkCodes ()\n\n\n\n\ncheckSpouseDeaths\n\n checkSpouseDeaths ()\n\n\n\n\ncheckMbrDeaths\n\n checkMbrDeaths ()",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -50,7 +50,7 @@
     "section": "preliminary checks",
     "text": "preliminary checks\n\nload dat\n\nloadDat()\n\n\n\ncheck if RBP and ID is in database\n\n# warn if not in address file\nchk = af[[\"Emp ID #1\", \"Updated\"]].copy()\nids = df[\"Emp ID #1\"].tolist()\n\nm = chk[\"Emp ID #1\"].isin(ids)\nchk = chk[m].copy()\n\nfor _id in ids:\n    if _id not in chk[\"Emp ID #1\"].tolist():\n        lg.warning(f\"{_id} not in address file\")\n\n\n# warn if currently flagged as RBP\nchk.columns = [\"id\", \"updated\"]\n\nchk.updated = chk.updated.fillna(\"1-jan-2017\")  # placeholder\nchk[\"updated\"] = pd.to_datetime(chk[\"updated\"], errors=\"coerce\")\nm = chk[\"updated\"].isna()\nfor _id in chk[m][\"id\"].tolist():\n    lg.warning(f\"{_id} currently flagged as RBP in address file\")\n\n\n\ncheck codes\n\ncheckCodes()\n\n\n\ncheck deaths\nFor spouse death, ensure name is provided (either in note, or already in database). Also check if we already have a DOD in the database.\n\ncheckSpouseDeaths()\n\nFor member death, check if we already have DOD in the database.\n\ncheckMbrDeaths()",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -61,7 +61,7 @@
     "section": "export files",
     "text": "export files\n\nnotes_list = df.full_note.tolist()\nlen(notes_list)\n\n\nupdates = ss.Updates(notes_list=notes_list)\nexportFiles(updates)\n\n\n# export log to double check warnings\n_log = loadSerializedLog(\"./updates.log\")\n_log.to_excel(\"_log.xlsx\", index=False)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -72,7 +72,7 @@
     "section": "generate update files for internal update",
     "text": "generate update files for internal update\n\nincludes changelog\n\n\nuxl.main(\n    \"Emp ID #1\", [\"Postal\", \"Bene/MB/Alt. Postal Code\", \"Spouse's SIN\"], \"Book1.xlsx\"\n)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Main Script"
     ]
   },
@@ -83,138 +83,151 @@
     "section": "",
     "text": "Contact Info\n\n[street:...]\n[city:...]\n[prov:...]\n[pc:...]\n[country:...]\n[ph:...]\n[cell:...]\n\n[remove phone]\n\n[rbp]\n[partial]\n\nIf using street, city, etc. but only partial update required. Fills empty values with what’s already in the address file.\n\n\nNote that street, city, etc. is only needed for non-Canadian addresses. Canadian addresses, within certain formatting specifications, will be picked up automatically.\nExamples:\n\nsu.extract_address1(\"123 Sesame St, Toronto, ON  M2Z1J9\")\n\n('123 Sesame St', 'Toronto', 'ON', 'M2Z 1J9', 'Canada')\n\n\n\nsu.extract_address1(\n    \"c/o Bob Roberts, 123 Sesame St, Toronto, ON                              M2Z   1J9\"\n)\n\n('c/o Bob Roberts, 123 Sesame St', 'Toronto', 'ON', 'M2Z 1J9', 'Canada')\n\n\n\nsu.extract_address1(\n    \"c/o Bob Roberts, 123 Sesame St,    Toronto   , on             m2z     1J9\"\n)\n\n('c/o Bob Roberts, 123 Sesame St', 'Toronto', 'ON', 'M2Z 1J9', 'Canada')\n\n\nUse commas to separate street, city, and province. Province should be abbreviated.\n\n# error - missing comma\nsu.extract_address1(\"Green Grove, 123 Sesame St,Toronto    on             m2z     1J9\")\n\n2024-12-31 20:13:21.423 | WARNING  | srs_updates.core:extract_address1:441 - Check province - s/b abbreviated; input str: Green Grove, 123 Sesame St,Toronto    on             m2z     1J9\n\n\nCheck province\n\n\n('Green Grove', '123 Sesame St', 'TO', 'M2Z 1J9', 'Canada')\n\n\n\nsu.extract_address1(\n    \"Green Grove, 123 Sesame St,Toronto,    on,             m2z     1J9\"\n)\n\n('Green Grove, 123 Sesame St', 'Toronto', 'ON', 'M2Z 1J9', 'Canada')\n\n\n\n# error - province not abbreviated\nsu.extract_address1(\n    \"Green Grove, 123 Sesame St,Toronto,    Quebec,             m2z     1J9\"\n)\n\n2024-12-31 20:13:21.456 | WARNING  | srs_updates.core:extract_address1:441 - Check province - s/b abbreviated; input str: Green Grove, 123 Sesame St,Toronto,    Quebec,             m2z     1J9\n\n\nCheck province\n\n\n('Green Grove, 123 Sesame St', 'Toronto', 'QU', 'M2Z 1J9', 'Canada')\n\n\nIf there’s other text in front of the address, use // as a separator:\n\nsu.extract_address1(\n    \"some text here // Green Grove Retirement Community, 123 Sesame St,Toronto,    QC,             m2z     1J9\"\n)\n\n('Green Grove Retirement Community, 123 Sesame St',\n 'Toronto',\n 'QC',\n 'M2Z 1J9',\n 'Canada')\n\n\nEmails will also be picked up automatically.\nPhone numbers, if formatted as xxx-xxx-xxxx will also be picked up. Use the [ph:...] code if the format is different (e.g., number has extension). Use [cell:...] to specify cell phone numbers, otherwise it will be picked up as a main/home phone number.\n\n\nDeaths\n\n[mdod:...] or [md:...] - member date of death\n\n[dc] - member proof of death\n\n[sdod:...] or [sd:...] - spouse date of death\n\n[sdc] - spouse proof of death\n\nValues passed into md/sd should preferably be formatted like 1-jan-2020 but any format parseable by the pandas.to_datetime function will work.\n\npd.to_datetime(\"01-jan-2020\")\n\nTimestamp('2020-01-01 00:00:00')\n\n\n\npd.to_datetime(\"1-jan-2020\")\n\nTimestamp('2020-01-01 00:00:00')\n\n\n\npd.to_datetime(\"Jan 1, 2020\")\n\nTimestamp('2020-01-01 00:00:00')\n\n\n\npd.to_datetime(\"Jan. 1, 2020\")\n\nTimestamp('2020-01-01 00:00:00')\n\n\n\npd.to_datetime(\"January 1, 2020\")\n\nTimestamp('2020-01-01 00:00:00')\n\n\n\npd.to_datetime(\"5/17/2020\")\n\nTimestamp('2020-05-17 00:00:00')\n\n\nIt’s best to avoid ambiguous formats like the one above. If there’s ambiguity, the default assumption is the month comes first:\n\npd.to_datetime(\"7/11/2020\")\n\nTimestamp('2020-07-11 00:00:00')\n\n\n\n\nNames\n\n[fn:...] / [ln:...] - member name\n[sfn:...] / [sln:...] - spouse name\n\n\n\nDOB\n\n[mdob:&lt;date&gt;]\n[sdob:&lt;date&gt;]\n[poa] - - For member proof of age column\n[spoa] - For spouse proof of age column\n\n\n\nBanking\n\n[bank:...]\n\nShould be formatted as [bank:xxx-xxxxx-x...]. Simple validation is included to check length of institution/transit numbers.\n\n\nSuspend\n\n[sus] - suspend payments\n\n\n\nMisc\n\n[cls] - flag to close log if default behaviour is to re-assign\n[excl] - indicates the update should be excluded from the maintenance file\n[comment:...] - append to Comment column in address file\n\n[rbp] - adds Returned Mail flag to internal database, sets mailing address to TELUS Health address in CIBC Mellon’s database\n[ssin:...]\n[lang:E] or [lang:F]\n[mail] - flag that address update should be for the mailing address columns for PIN, not residential\n[remove spouse] - clear out all spouse fields (name, DOB, etc.)",
     "crumbs": [
-      "ref",
+      "Docs",
       "Codes"
     ]
   },
   {
     "objectID": "harmony_automation.html",
     "href": "harmony_automation.html",
-    "title": "11_harmony_automation",
+    "title": "harmony_automation",
     "section": "",
     "text": "As I own the day-to-day data updates process for the Sears plan, there can be &gt;100 tickets to process every few weeks.\nThis module uses Microsoft’s Playwright library to automate scraping, closing, re-assigning, and adding tickets in bulk to our internal ticket system, “Harmony”.\n\n\nhelpers\n\n\nappendReassignedTkt2Yml\n\n appendReassignedTkt2Yml (t_tkt:str|int, trk_fp:str)\n\nSave to file in case of running over several sessions.\n\n\n\n\nType\nDetails\n\n\n\n\nt_tkt\nstr | int\nstr | int\n\n\ntrk_fp\nstr\nstr\n\n\nReturns\nNone\n\n\n\n\n\n\n\nappendClosedTkt2Yml\n\n appendClosedTkt2Yml (t_tkt:str|int, trk_fp:str)\n\nSave to file in case of running over several sessions.\n\n\n\n\nType\nDetails\n\n\n\n\nt_tkt\nstr | int\nstr | int\n\n\ntrk_fp\nstr\nstr\n\n\nReturns\nNone\n\n\n\n\n\n\n\n\nPlaywright\n\n\nstart_page\n\n start_page ()\n\n-&gt; Page\n\n\n\nlogin\n\n login (page:playwright.async_api._generated.Page)\n\n-&gt; int\n\n\n\n\nType\nDetails\n\n\n\n\npage\nPage\n\n\n\nReturns\nint\nint - 0 == success\n\n\n\n\n\n\nsearch_ticket\n\n search_ticket (page:playwright.async_api._generated.Page, tkt:str)\n\nSearch by ticket #\n\n\n\n\nType\nDetails\n\n\n\n\npage\nPage\nPage\n\n\ntkt\nstr\nstr\n\n\nReturns\nint\nint - 0 == success\n\n\n\n\n\n\nexport_logs\n\n export_logs (page:playwright.async_api._generated.Page,\n              _out_fp:str='./logs.parquet')\n\nAssumes we’re on home page. Gets number of pending tickets, goes to My Logs page, and exports latest 80 tickets to ./logs.parquet\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\npage\nPage\n\nPage\n\n\n_out_fp\nstr\n./logs.parquet\nstr\n\n\nReturns\nNone\n\n\n\n\n\n\n\n\nscrape_tickets\n\n scrape_tickets (page:playwright.async_api._generated.Page,\n                 scrape_df:pandas.core.frame.DataFrame)\n\nGo to each ticket that needs scraping and scrape all notes/comments, formatted in chronological order.\n\n\n\n\nType\nDetails\n\n\n\n\npage\nPage\nPage\n\n\nscrape_df\nDataFrame\npd.DataFrame\n\n\nReturns\nDataFrame\npd.DataFrame\n\n\n\n\n\n\nscrape_and_concat\n\n scrape_and_concat (page:playwright.async_api._generated.Page,\n                    existing_dat:pandas.core.frame.DataFrame,\n                    exported_logs:pandas.core.frame.DataFrame,\n                    _out_fp:str='./scrape_concat.parquet')\n\nIdentify logs that need scraping from exported logs. Run export_logs first. Then scrape and concatenate with existing data/notes. Export to ./scrape_concat.parquet.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\npage\nPage\n\nPage\n\n\nexisting_dat\nDataFrame\n\npd.DataFrame\n\n\nexported_logs\nDataFrame\n\npd.DataFrame\n\n\n_out_fp\nstr\n./scrape_concat.parquet\nstr\n\n\nReturns\nNone\n\n\n\n\n\n\n\n\n\nautomation\n\n\nclose_log\n\n close_log (page:playwright.async_api._generated.Page, tkt:str,\n            trk_fp:str, note:str='Done')\n\nClose individual log.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\npage\nPage\n\nPage\n\n\ntkt\nstr\n\nstr\n\n\ntrk_fp\nstr\n\nstr\n\n\nnote\nstr\nDone\nstr\n\n\nReturns\nint\n\n0 - success // 1 - already closed // -1 - error w/ filling resolution\n\n\n\n\n\n\nreassign_log\n\n reassign_log (page:playwright.async_api._generated.Page, tkt:str,\n               trk_fp:str, note:str)\n\nReassign individual log. Edit config to set colleague.\n\n\n\n\nType\nDetails\n\n\n\n\npage\nPage\nPage\n\n\ntkt\nstr\nstr\n\n\ntrk_fp\nstr\nstr\n\n\nnote\nstr\nstr\n\n\nReturns\nNone\n\n\n\n\n\n\n\nadd_logs\n\n add_logs (df:pandas.core.frame.DataFrame,\n           page:playwright.async_api._generated.Page)\n\nAdd logs in bulk.\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\ndf\nDataFrame\npd.DataFrame - w/ 2 columns: id (Employee #) and note\n\n\npage\nPage\nPage\n\n\nReturns\nNone",
     "crumbs": [
-      "11_harmony_automation"
+      "API Reference",
+      "harmony_automation"
     ]
   },
   {
     "objectID": "export.html",
     "href": "export.html",
-    "title": "06_export",
+    "title": "export",
     "section": "",
     "text": "01 export files\n\n\ncreateLogTrkFile\n\n createLogTrkFile (updates:srs_updates.srs_specific.Updates,\n                   out_fpath:str)\n\ncreate log_trk df\n\n\n\n\nType\nDetails\n\n\n\n\nupdates\nUpdates\nss.Updates\n\n\nout_fpath\nstr\nstr\n\n\nReturns\nDataFrame\npd.DataFrame\n\n\n\n\n\n\ncreateAfUpdateFile\n\n createAfUpdateFile (updates:srs_updates.srs_specific.Updates)\n\n-&gt; pd.DataFrame\n\n\n\n\nType\nDetails\n\n\n\n\nupdates\nUpdates\nss.Updates\n\n\nReturns\nDataFrame\npd.DataFrame\n\n\n\n\n\n\ncreateMaintWorkFile\n\n createMaintWorkFile (updates:srs_updates.srs_specific.Updates)\n\n-&gt; pd.DataFrame\n\n\n\n\nType\nDetails\n\n\n\n\nupdates\nUpdates\nss.Updates\n\n\nReturns\nDataFrame\npd.DataFrame\n\n\n\n\n\n\nexportFiles\n\n exportFiles (updates:srs_updates.srs_specific.Updates)\n\n*Create export directory w/ datetime suffix and exports the following:\n\nnotes list yml\npickled Updates object\nAF updates xlsx\nworking maint file updates xlsx\noffcycle file xlsx\nlog trk xlsx*\n\n\n\n\n\nType\nDetails\n\n\n\n\nupdates\nUpdates\nss.Updates\n\n\nReturns\nNone\n\n\n\n\n\n\n\n02 import\n\n\nloadPickledUpdates\n\n loadPickledUpdates (fpath:str)\n\nLoad exported pickled Updates object\n\n\n\n\nType\nDetails\n\n\n\n\nfpath\nstr\nstr\n\n\nReturns\nUpdates\nss.Updates",
     "crumbs": [
-      "06_export"
+      "API Reference",
+      "export"
     ]
   },
   {
     "objectID": "update_data.html",
     "href": "update_data.html",
-    "title": "01_update_data",
+    "title": "update_data",
     "section": "",
     "text": "Data class to store updates for the address file and maintenance file\n\nUsing a data class here allows for greater flexibility when adding more properties later\n\nOther functions/modules in this package modifies/extracts the properties/fields to generate output files for internal and external data updates\n\n\n\n\n\n UpdateData (note:str='', email:str='', phone1:str='', phone2:str='',\n             street:str='', city:str='', prov:str='', pc:str='',\n             country:str='', mfn:str='', mln:str='', sfn:str='',\n             sln:str='', pin_fn:str='', pin_ln:str='', mdod_str:str='',\n             mdc:str='', sdod_str:str='', sdc:str='', death_note:str='',\n             ticket_num:str='', key:str='', cs:str='', csd_str:str='',\n             payee_status:str='', banking:str='', mdob_str:str='',\n             sdob_str:str='', srv:bool=False, pin_update:bool=False,\n             rel_pin_ids:list=&lt;factory&gt;, pin_group:list=&lt;factory&gt;)\n\n\n\n\nnote: str = \"\"  # full note incl ID and URL to ticket\n\n# contact info\nemail: str = \"\"\nphone1: str = \"\"\nphone2: str = \"\"\nstreet: str = \"\"\ncity: str = \"\"\nprov: str = \"\" # s/b abbreviated\npc: str = \"\"\ncountry: str = \"\"\n\n# names\nmfn: str = \"\"\nmln: str = \"\"\nsfn: str = \"\"\nsln: str = \"\"\npin_fn: str = \"\"\npin_ln: str = \"\"\n\n# death\nmdod_str: str = \"\"\nmdc: str = \"\"\nsdod_str: str = \"\"\nsdc: str = \"\"\n\n# for Harmony\ndeath_note: str = \"\"\nticket_num: str = \"\"\nkey: str = \"\"  # from legacy system, before ticket #s were implemented\n\n# current status\ncs: str = \"\"\ncsd_str: str = \"\"\n\n# dob\nmdob_str: str = \"\"\nsdob_str: str = \"\"\n\n# PIN\npayee_status: str = \"\"\nbanking: str = \"\"\nsrv: bool = False\npin_update: bool = False\nrel_pin_ids: list = field(default_factory=_default_empty_list)\npin_group: list = field(default_factory=_default_empty_list)\n\n\n\n\n\n\n\n UpdateData.ee_id ()\n\n-&gt; str - Emp ID #1\n\n\n\n\n\n UpdateData.harmony_url ()\n\n-&gt; str - url\n\n\n\n\n\n UpdateData.update_date ()\n\n-&gt; pd.Timestamp | None // Contact info update date\n\n\n\n\n\n UpdateData.full_prov ()\n\n-&gt; str - full province name for address file\n\n\n\n\n\n UpdateData.bank_inst ()\n\n-&gt; str - inst #\n\n\n\n\n\n UpdateData.bank_transit ()\n\n-&gt; str - transit #\n\n\n\n\n\n UpdateData.bank_acc ()\n\n-&gt; str - account #\n\n\n\n\n\n UpdateData.mdod ()\n\n-&gt; pd.Timestamp | None // member DOD\n\n\n\n\n\n UpdateData.sdod ()\n\n-&gt; pd.Timestamp | None // spouse DoD\n\n\n\n\n\n UpdateData.csd ()\n\n-&gt; pd.Timestamp | None // Date of Current Status\n\n\n\n\n\n UpdateData.mdob ()\n\n-&gt; pd.Timestamp | None\n\n\n\n\n\n UpdateData.sdob ()\n\n-&gt; pd.Timestamp | None\n\n\n\n\n\n UpdateData.street1 ()\n\n-&gt; str - split if c/o in street or if length exceeds 30 characters\n\n\n\n\n\n UpdateData.street2 ()\n\n-&gt; str\n\n\n\n\n\n UpdateData.close ()\n\n-&gt; str - Flag if the Harmony log should be closed or re-assigned. Y == close, N == re-assign (death case)\n\n\n\n\n\n UpdateData.comment ()\n\n-&gt; str | None // For Comment column in address file\n\n\n\n\n\n UpdateData.poa ()\n\n-&gt; str | None // Member's Proof of Age on file?\n\n\n\n\n\n UpdateData.spoa ()\n\n-&gt; str | None // Spouse’s Proof of Age on file?\n\n\n\n\n\n UpdateData.rbp ()\n\n-&gt; bool\n\n\n\n\n\n UpdateData.mailing_address ()\n\nAffects PIN / maintenance files only. Flag that an address change is for the mailing columns, not residential.\n\n\n\n\n\n UpdateData.lang ()\n\ne.g., [lang:E] or [lang:F] - must be E or F\n\n\n\n\n\n UpdateData.remove_spouse ()\n\n-&gt; bool\n\n\n\n\n\n\n\n\n UpdateData.addNameSuffixIfDeceased ()\n\nAdd (Estate of) suffix to first name for deceased member, (died) for deceased spouse\n\n\n\n\n\n UpdateData.setSrvFlag ()\n\nChecks all associated PIN IDs for a S prefix. Modifies self.srv field if found.",
     "crumbs": [
-      "01_update_data"
+      "API Reference",
+      "update_data"
     ]
   },
   {
     "objectID": "update_data.html#fields",
     "href": "update_data.html#fields",
-    "title": "01_update_data",
+    "title": "update_data",
     "section": "",
     "text": "note: str = \"\"  # full note incl ID and URL to ticket\n\n# contact info\nemail: str = \"\"\nphone1: str = \"\"\nphone2: str = \"\"\nstreet: str = \"\"\ncity: str = \"\"\nprov: str = \"\" # s/b abbreviated\npc: str = \"\"\ncountry: str = \"\"\n\n# names\nmfn: str = \"\"\nmln: str = \"\"\nsfn: str = \"\"\nsln: str = \"\"\npin_fn: str = \"\"\npin_ln: str = \"\"\n\n# death\nmdod_str: str = \"\"\nmdc: str = \"\"\nsdod_str: str = \"\"\nsdc: str = \"\"\n\n# for Harmony\ndeath_note: str = \"\"\nticket_num: str = \"\"\nkey: str = \"\"  # from legacy system, before ticket #s were implemented\n\n# current status\ncs: str = \"\"\ncsd_str: str = \"\"\n\n# dob\nmdob_str: str = \"\"\nsdob_str: str = \"\"\n\n# PIN\npayee_status: str = \"\"\nbanking: str = \"\"\nsrv: bool = False\npin_update: bool = False\nrel_pin_ids: list = field(default_factory=_default_empty_list)\npin_group: list = field(default_factory=_default_empty_list)",
     "crumbs": [
-      "01_update_data"
+      "API Reference",
+      "update_data"
     ]
   },
   {
     "objectID": "update_data.html#properties",
     "href": "update_data.html#properties",
-    "title": "01_update_data",
+    "title": "update_data",
     "section": "",
     "text": "UpdateData.ee_id ()\n\n-&gt; str - Emp ID #1\n\n\n\n\n\n UpdateData.harmony_url ()\n\n-&gt; str - url\n\n\n\n\n\n UpdateData.update_date ()\n\n-&gt; pd.Timestamp | None // Contact info update date\n\n\n\n\n\n UpdateData.full_prov ()\n\n-&gt; str - full province name for address file\n\n\n\n\n\n UpdateData.bank_inst ()\n\n-&gt; str - inst #\n\n\n\n\n\n UpdateData.bank_transit ()\n\n-&gt; str - transit #\n\n\n\n\n\n UpdateData.bank_acc ()\n\n-&gt; str - account #\n\n\n\n\n\n UpdateData.mdod ()\n\n-&gt; pd.Timestamp | None // member DOD\n\n\n\n\n\n UpdateData.sdod ()\n\n-&gt; pd.Timestamp | None // spouse DoD\n\n\n\n\n\n UpdateData.csd ()\n\n-&gt; pd.Timestamp | None // Date of Current Status\n\n\n\n\n\n UpdateData.mdob ()\n\n-&gt; pd.Timestamp | None\n\n\n\n\n\n UpdateData.sdob ()\n\n-&gt; pd.Timestamp | None\n\n\n\n\n\n UpdateData.street1 ()\n\n-&gt; str - split if c/o in street or if length exceeds 30 characters\n\n\n\n\n\n UpdateData.street2 ()\n\n-&gt; str\n\n\n\n\n\n UpdateData.close ()\n\n-&gt; str - Flag if the Harmony log should be closed or re-assigned. Y == close, N == re-assign (death case)\n\n\n\n\n\n UpdateData.comment ()\n\n-&gt; str | None // For Comment column in address file\n\n\n\n\n\n UpdateData.poa ()\n\n-&gt; str | None // Member's Proof of Age on file?\n\n\n\n\n\n UpdateData.spoa ()\n\n-&gt; str | None // Spouse’s Proof of Age on file?\n\n\n\n\n\n UpdateData.rbp ()\n\n-&gt; bool\n\n\n\n\n\n UpdateData.mailing_address ()\n\nAffects PIN / maintenance files only. Flag that an address change is for the mailing columns, not residential.\n\n\n\n\n\n UpdateData.lang ()\n\ne.g., [lang:E] or [lang:F] - must be E or F\n\n\n\n\n\n UpdateData.remove_spouse ()\n\n-&gt; bool",
     "crumbs": [
-      "01_update_data"
+      "API Reference",
+      "update_data"
     ]
   },
   {
     "objectID": "update_data.html#methods",
     "href": "update_data.html#methods",
-    "title": "01_update_data",
+    "title": "update_data",
     "section": "",
     "text": "UpdateData.addNameSuffixIfDeceased ()\n\nAdd (Estate of) suffix to first name for deceased member, (died) for deceased spouse\n\n\n\n\n\n UpdateData.setSrvFlag ()\n\nChecks all associated PIN IDs for a S prefix. Modifies self.srv field if found.",
     "crumbs": [
-      "01_update_data"
+      "API Reference",
+      "update_data"
     ]
   },
   {
     "objectID": "core.html",
     "href": "core.html",
-    "title": "00_core",
+    "title": "core",
     "section": "",
     "text": "init\n\n\nsetupLogger\n\n setupLogger (name:str='log', serialize:bool=False)\n\nAdd handler attached to &lt;name&gt;.log at trace level and up.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nname\nstr\nlog\nstr\n\n\nserialize\nbool\nFalse\nbool\n\n\nReturns\nNone\n\n\n\n\n\n\n\n\nloadSerializedLog\n\n loadSerializedLog (log_fp:str, incl_full_record:bool=False,\n                    incl_unix_ts:bool=False)\n\nConvert serialized log to dataframe for excel export.\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nlog_fp\nstr\n\nstr\n\n\nincl_full_record\nbool\nFalse\nbool\n\n\nincl_unix_ts\nbool\nFalse\nbool\n\n\nReturns\nDataFrame\n\npd.DataFrame\n\n\n\n\n\n\nyaml_helper\n\n yaml_helper (fpath:str='./config.yaml', mode:str='r',\n              data:Optional[dict]=None)\n\nHelper function to read, write, append to files in yaml format. Checks for duplicate keys if reading or appending.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nfpath\nstr\n./config.yaml\nstr\n\n\nmode\nstr\nr\nstr - r / a / w\n\n\ndata\nOptional\nNone\ncannot be None if writing or appending\n\n\nReturns\ndict\n\ndict - data if reading, {‘r’: 0} if writing/appending\n\n\n\n\n\n\n\nextract emails\n\n\nextract_emails\n\n extract_emails (t_str:str)\n\nExtract all emails from note using regex. If multiple emails found, join w/ //.\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\nstr\nemail address\n\n\n\n\n\ntestExtractEmails\nassert extract_emails(\"Some text here bob@gmail.ca some text here\") == \"bob@gmail.ca\"\nassert (\n    extract_emails(\"sdasd asd a232 very.common@example.com //\")\n    == \"very.common@example.com\"\n)\nassert (\n    extract_emails(\"sdasd asd FirstName.LastName@EasierReading.org\")\n    == \"FirstName.LastName@EasierReading.org\"\n)\nassert extract_emails(\"sds extract_emails x@example.com asda \") == \"x@example.com\"\nassert (\n    extract_emails(\n        \"long.email-address-with-hyphens@and.subdomains.example.com asda dasd asdasd \"\n    )\n    == \"long.email-address-with-hyphens@and.subdomains.example.com\"\n)\nassert (\n    extract_emails(\"dasd adasd user.name+tag+sorting@example.com asd asd \")\n    == \"user.name+tag+sorting@example.com\"\n)\nassert (\n    extract_emails(\"dasd adasd user.name+tag+sorting@s.example    asd asd \")\n    == \"user.name+tag+sorting@s.example\"\n)\nassert (\n    extract_emails(\n        \"dasd bob@gmail.com adasd user.name+tag+sorting@s.example    asd asd \"\n        + \"dasd adasd user.name+tag+sorting@example.com asd asd \"\n    )\n    == \"bob@gmail.com // user.name+tag+sorting@s.example // user.name+tag+sorting@example.com\"\n)\n\n\n\nSupposedly, this is a valid email but the script won’t pick it up. Unlikely to encounter.\n\nt_str = \"admin@exampl sdasd \"\nextract_emails(t_str)\n\n''\n\n\nForward slash is supposedly valid as well but the script won’t pick this up. Unlikely to encounter.\n\nt_str = \"dasd name/surname@example.com sdasd \"\nextract_emails(t_str)\n\n'surname@example.com'\n\n\n\n\n\n\nextract phone numbers\n\n\nextract_phone1\n\n extract_phone1 (t_str:str)\n\nExtract all phone numbers using xxx-xxx-xxxx pattern, or [ph:...] if alternate format (e.g., [ph:123-456-7890 ext. 8001]). If the latter pattern is found, does not check for the former.\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\nstr\nstr\n\n\n\n\n\ntestExtractHomePhone\nassert extract_phone1(\"dasda  123-123-1234 aasdasd ... \") == \"123-123-1234\"\nassert (\n    extract_phone1(\"dasda  123-123-1234 // 123-343-4521 \")\n    == \"123-123-1234 // 123-343-4521\"\n)\nassert (\n    extract_phone1(\"asdasd as [ph: 903-123-4365 ext 8001] // sadasd \")\n    == \"903-123-4365 ext 8001\"\n)\nassert (\n    extract_phone1(\"asdasd as [pH: 903-123-4365 ext 8001] // sadasd \")\n    == \"903-123-4365 ext 8001\"\n)\nassert (\n    extract_phone1(\"asdasd as 123-123-1234 // [pH: 903-123-4365 ext 8001] // sadasd \")\n    == \"903-123-4365 ext 8001\"\n)\nassert (\n    extract_phone1(\n        \"asdasd as  // [pH: 903-123-4365 ext 8001 // 123-123-1234] // sadasd \"\n    )\n    == \"903-123-4365 ext 8001 // 123-123-1234\"\n)\n\n\n\n\n\nextract_phone2\n\n extract_phone2 (t_str:str)\n\nWork or cell number. Put inside [cell:...]\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\nstr\nstr\n\n\n\n\n\ntestExtractCellPhone\nassert extract_phone2(\"asdsad 123-213-4521\") == \"\"\nassert extract_phone2(\"asdsad [cell: 123-213-4521  ]\") == \"123-213-4521\"\nassert extract_phone2(\"asdsad [CELL:  123-213-4521  ]\") == \"123-213-4521\"\nassert (\n    extract_phone2(\"asdsad [CELL:  123-213-4521 // 999-99999999999 ]\")\n    == \"123-213-4521 // 999-99999999999\"\n)\n\n\n\n\n\nextract_phone_numbers\n\n extract_phone_numbers (t_str:str)\n\nMain function to extract phone numbers from a note. To remove all phone numbers on file, use [remove phone].\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str, str]\n\n\n\n\nextract_phone_numbers(\".. [remove phone] asdsad\")\n\n('&lt;&lt;&lt;blank&gt;&gt;&gt;', '&lt;&lt;&lt;blank&gt;&gt;&gt;')\n\n\n&lt;&lt;&lt;blank&gt;&gt;&gt; tells the update_xl module to clear existing data.\n\n\ntestExtractPhoneNumbers\nassert extract_phone_numbers(\"[remove phone]\") == (\"&lt;&lt;&lt;blank&gt;&gt;&gt;\", \"&lt;&lt;&lt;blank&gt;&gt;&gt;\")\nassert extract_phone_numbers(\n    \"123 sesame st ... 123-345-3245 // [cell: 905-123-5453]\"\n) == (\"123-345-3245\", \"905-123-5453\")\nassert extract_phone_numbers(\n    \"... [ph: 123-432-5643 ext 900] // [cell: 123-345-4452 ext 9000 ]\"\n) == (\"123-432-5643 ext 900\", \"123-345-4452 ext 9000\")\n\nassert extract_phone_numbers(\"234 123-123-1234 // 234-234-2345\") == (\n    \"123-123-1234 // 234-234-2345\",\n    \"\",\n)\nassert extract_phone_numbers(\n    \"223423434 sadasd 123-123-1234 // 234-234-2345 // [cell: 123-543-9999]\"\n) == (\"123-123-1234 // 234-234-2345\", \"123-543-9999\")\nassert extract_phone_numbers(\n    \"223423434 sadasd [ph: 123-123-1234 // 234-234-2345 (POA)] 456-234-1231 // [cell: 123-543-9999]\"\n) == (\"123-123-1234 // 234-234-2345 (POA)\", \"123-543-9999\")\nassert extract_phone_numbers(\"[cell:306-535-5490]\") == (\"\", \"306-535-5490\")\nassert extract_phone_numbers(\"... 306-535-5490 ...\") == (\"306-535-5490\", \"\")\n\n\n\n\n\n\nextract address\n\n\nfull_prov_name\n\n full_prov_name (t_str:str)\n\nAddress file uses full name, not abbreviation\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\nstr\nstr\n\n\n\n\n\ntestFullProv\nassert full_prov_name(\"FL\") == \"FL\"  # if not found, returns input string\nassert full_prov_name(\"on\") == \"Ontario\"\nassert full_prov_name(\"yt\") == \"Yukon\"\nassert full_prov_name(\"Bc\") == \"British Columbia\"\n\n\n\n\n\nextract_address1\n\n extract_address1 (t_str:str)\n\nFor Canadian addresses.\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str, str, str, str, str]: (street, city, abbreviated province, postal code, country)\n\n\n\n\nAddress can be formatted in a variety of ways. See below tests for examples.\n\n\ntestExtractCdnAddress\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Toronto, ON  M5X 2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Toronto\",\n    \"ON\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Toronto, ON   M5X2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Toronto\",\n    \"ON\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Toronto, ON.   M5X2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Toronto\",\n    \"ON\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Quebec,  QC.   M5X2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Quebec\",\n    \"QC\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Quebec,  qc.   M5X2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Quebec\",\n    \"QC\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Some City,  pe,   M5X2D1  // ... \"\nassert extract_address1(t_str) == (\n    \"c/o Jim Bob, 123 Sesame St\",\n    \"Some City\",\n    \"PE\",\n    \"M5X 2D1\",\n    \"Canada\",\n)\n\n\n\nIf the pattern indicates it is a Canadian address but the province isn’t a valid abbreviation, a warning will be raised:\n\nt_str = \"... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... \"\nextract_address1(t_str)\n\n2025-07-10 16:17:49.899 | WARNING  | __main__:extract_address1:49 - Check province - s/b abbreviated; input str: ... // c/o Jim Bob, 123 Sesame St, Some City,  Manitoba,   M5X2D1  // ... \n\n\n('c/o Jim Bob, 123 Sesame St', 'Some City', 'MA', 'M5X 2D1', 'Canada')\n\n\n\n\n\nextract_address2\n\n extract_address2 (t_str:str)\n\nextract_address1 only works for Canadian addresses. This function processes non-Canadian addresses.\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str, str, str, str, str]\n\n\n\n\n\ntestExtractIntlAddress\nt_str = \"[street:123 Sesame St][city:Miami][prov:FL][pc:02345][country:US]\"\nassert extract_address2(t_str) == (\"123 Sesame St\", \"Miami\", \"FL\", \"02345\", \"US\")\nt_str = \"[street:][city:][prov:][pc:][country:US]\"\nassert extract_address2(t_str) == (\n    \"\",\n    \"\",\n    \"\",\n    \"\",\n    \"US\",\n)\n\n\n\n\n\n\nname updates\n\n\nextract_names\n\n extract_names (t_str:str)\n\n[fn:...] / [ln:...] for member. [sfn:...] / [sln:...] for spouse.\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str, str, str, str]\n\n\n\n\n\ntestExtractNames\nt_str = \"[FN:Bob][Ln: Jim] [sfn:Mary][sln:Thomas]\"\nassert extract_names(t_str) == (\"Bob\", \"Jim\", \"Mary\", \"Thomas\")\n\nt_str = \"[FN:Bob][sfn:Mary][sln:Thomas]\"\nassert extract_names(t_str) == (\"Bob\", \"\", \"Mary\", \"Thomas\")\n\nt_str = \"[fn:  Sam ]\"\nassert extract_names(t_str) == (\"Sam\", \"\", \"\", \"\")\n\n\n\n\n\n\ndeaths\n\n\ncheck_mbr_death\n\n check_mbr_death (t_str:str)\n\n*Checks for either [mdod:&lt;dod&gt;] or [md:&lt;dod&gt;] in note. &lt;dod&gt; should be a string that can be parsed by the pandas.to_datetime function. Preferably in the format of dd-mmm-yyyy.\nIf there’s proof of death, add [dc] to note.*\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str, str] - (dod formatted as str, proof of death)\n\n\n\n\n\ntestMbrDeath\nassert check_mbr_death(\" // [mdod:1-jan-2020][dc] // \") == (\n    (\"2020-01-01\"),\n    \"Yes\",\n)\nassert check_mbr_death(\" // [mdod:1-jan-2020] // \") == (\n    (\"2020-01-01\"),\n    \"\",\n)\nassert check_mbr_death(\" // [md:1-jan-2020][DC] // \") == (\n    (\"2020-01-01\"),\n    \"Yes\",\n)\nassert check_mbr_death(\" // [md:1-feb-2023] // \") == (\n    (\"2023-02-01\"),\n    \"\",\n)\nassert check_mbr_death(\" // [mdob:1-feb-2023] // \") == (\n    \"\",\n    \"\",\n)\nassert check_mbr_death(\" // [dc] // \") == (\n    \"\",\n    \"Yes\",\n)\n\n\n\n\n\ncheck_spouse_death\n\n check_spouse_death (t_str:str)\n\n*Checks for either [sdod:&lt;dod&gt;] or [sd:&lt;dod&gt;] in note. &lt;dod&gt; should be a string that can be parsed by the pandas.to_datetime function. Preferably in the format of dd-mmm-yyyy.\nIf there’s proof of death, add [sdc] to note.*\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str,str] - (dod formatted as str, proof of death)\n\n\n\n\n\ntestSpouseDeath\nassert check_spouse_death(\" // [sdod:1-jan-2020][sdc] // \") == (\n    (\"2020-01-01\"),\n    \"Yes\",\n)\nassert check_spouse_death(\" // [sdod:1-jan-2020] // \") == (\n    (\"2020-01-01\"),\n    \"\",\n)\nassert check_spouse_death(\" // [sd:1-jan-2020][sdc] // \") == (\n    (\"2020-01-01\"),\n    \"Yes\",\n)\nassert check_spouse_death(\" // [sd:1-feb-2023] // \") == (\n    (\"2023-02-01\"),\n    \"\",\n)\nassert check_spouse_death(\" // [sdob:1-feb-2023] // \") == (\n    \"\",\n    \"\",\n)\nassert check_spouse_death(\" // [sdc] // \") == (\n    \"\",\n    \"Yes\",\n)\n\n\n\n\n\nget_cs\n\n get_cs (t_str:str)\n\nGet preliminary values for Current Status and Date of Current Status.\n\n\n\n\n\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\n(current status, curr status date formatted as str)\n\n\n\n\n\ntestCurrentStatus\nt_str = \"[sd:1-jan-2023][md:1-feb-2024]\"\nassert get_cs(t_str) == (\"N/A (died)\", (\"2024-02-01\"))\n\nt_str = \"[sd:1-jan-2023][md:1-feb-2024]\"\nassert get_cs(t_str) == (\"N/A (died)\", (\"2024-02-01\"))\n\nt_str = \"[md:1-feb-2024]\"\nassert get_cs(t_str) == (\"N/A (died)\", (\"2024-02-01\"))\n\nt_str = \"[sd:1-feb-2024]\"\nassert get_cs(t_str) == (\"N/A (died)\", (\"2024-02-01\"))\n\n\n\n\n\n\npayee status, banking\n\nPayee status of 04 means payee is deceased\nIf both death notification and banking received:\n\nMember death notification + banking\n\nno need to add banking to maintenance file\n\nSpouse death notification + banking\n\nPre-deceased spouse: add banking to maintenance file\nSurvivor death: no need to add banking to maintenance file\n\n\n\n\n\npayee_status_and_banking\n\n payee_status_and_banking (t_str:str, validate:bool=True)\n\nGet payee status for PIN: 00 for banking update, 01 for suspend, 04 for payee death. If 00, 2nd element of returned tuple will be new banking info.\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nt_str\nstr\n\nstr\n\n\nvalidate\nbool\nTrue\ncheck length of institution / transit numbers\n\n\nReturns\ntuple\n\ntuple[str, str]: (new status code, new banking) // (\"\", \"\") if no change\n\n\n\n\n\ntestPayeeStatusAndBanking\nassert payee_status_and_banking(\"// [bank:123-12334-312312312312] asdasd \") == (\n    \"00\",\n    \"123-12334-312312312312\",\n)\nassert payee_status_and_banking(\"[sus]\") == (\"01\", \"\")\n\nwith pytest.raises(\n    Exception, match=\"Can't suspend payments and update banking info at the same time\"\n):\n    payee_status_and_banking(\"[sus][bank:...]\")\n\nwith pytest.raises(AssertionError, match=\"Invalid transit\"):\n    payee_status_and_banking(\"// [bank:123-132334-312312312312] asdasd \")\nwith pytest.raises(AssertionError, match=\"Invalid institution\"):\n    payee_status_and_banking(\"// [bank:23-13234-312312312312] asdasd \")\n\n# preliminary values only\n# later function determines final payee status / banking info\nassert payee_status_and_banking(\n    \"// [sdod:1-jan-2024][bank:123-12334-312312312312]\"\n) == (\"04\", \"\")\n\nassert payee_status_and_banking(\n    \"// [mdod:1-jan-2024][bank:123-12334-312312312312]\"\n) == (\"04\", \"\")\n\nassert payee_status_and_banking(\"[mdod:1-jan-2020]\") == (\"04\", \"\")\nassert payee_status_and_banking(\"[sdod:1-jan-2020]\") == (\"04\", \"\")\n\nassert payee_status_and_banking(\n    \"// [sdod:1-jan-2020][bank:123-12334-312312312312]\"\n) == (\"04\", \"\")\nassert payee_status_and_banking(\n    \"// [mdod:1-jan-2020][bank:123-12334-312312312312]\"\n) == (\"04\", \"\")\n\n\n\n\n\n\nDOB\n\n\ndob_updates\n\n dob_updates (t_str:str)\n\nUpdate DOB in both address file and PIN using the following patterns: [mdob:&lt;dob&gt;], [sdob:&lt;sdob&gt;]\n\n\n\n\nType\nDetails\n\n\n\n\nt_str\nstr\nstr\n\n\nReturns\ntuple\ntuple[str,str] - (mdob, sdob)\n\n\n\n\n\ntestDobUpdates\nt_str = \"[mdob:1-jan-1960]\"\nassert dob_updates(t_str) == (\"1960-01-01\", \"\")\nt_str = \"[sdob:1-jan-1960]\"\nassert dob_updates(t_str) == (\"\", \"1960-01-01\")\nt_str = \"[mdob:28-feb-1954][sdob:1-jan-1960]\"\nassert dob_updates(t_str) == (\n    \"1954-02-28\",\n    \"1960-01-01\",\n)",
     "crumbs": [
-      "00_core"
+      "API Reference",
+      "core"
     ]
   },
   {
     "objectID": "srs_specific.html",
     "href": "srs_specific.html",
-    "title": "03_srs_specific",
+    "title": "srs_specific",
     "section": "",
-    "text": "Class to store and further process UpdateData objects\n\n\n\n\n\n Updates (notes_list:list[str],\n          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,\n          date:str='2025-07-19', rel_pin_ids:list[str]=&lt;factory&gt;,\n          query_df:pandas.core.frame.DataFrame|None=None,\n          test_cml_fp:str|None=None)\n\n\n\n\nnotes_list: list[str]\nall_updates: list[ud.UpdateData] = field(default_factory=_default_empty_list)\ndate: str = _init_ts()\nrel_pin_ids: list[str] = field(default_factory=_default_empty_list)\nquery_df: pd.DataFrame = None\n\n\n\n\n\n\nmethods that run after initializing the Updates object\n\n\n\n\n\n\n Updates.processNotesPrelim ()\n\n*Preliminary processing and conversion of notes into UpdateData objects:\n\nconvert notes into UpdateData objects\nadd first name + suffix if there was a death\ncreate note for re-assigning death-related Harmony logs\nassigns list of UpdateData objects to self.all_updates*\n\n\n\n\n\n\n Updates.filterPinIDs ()\n\nFilter PIN IDs to speed up addAssociatedIDs method. Assigns filtered list to self.rel_pin_ids\n\n\n\n\n\n Updates.addAssociatedIDs ()\n\nFor each UpdateData object, add all associated PIN IDs to ud.rel_pin_ids. E.g., S1234567, X1234567, T1234567, 1234567 would all be associated with a base ID of 1234567.\n\n\n\n\n\n Updates.determineIfSrv ()\n\nCheck if SS in pay\n\n\n\n\n\n Updates.loadQueryDF ()\n\nLoads query tab from CML tracker and assigns to self query_df\n\n\n\n\n\n Updates.addKeyAndTktNum ()\n\nFor each UpdateData object, check self query_df for key and ticket number and assign to ud.key and ud.ticket_num\n\n\n\n\n\n Updates.processPartialAddresses ()\n\nHandle cases where only partial address update is required. Use [partial] flag to indicate such cases.\n\n\n\n\n\n Updates.getPinGroup ()\n\nGet payee/PIN group from curr_mbrs sheet for all associated PIN IDs. Append results to ud.pin_group field.\n\n\n\n\n\n Updates.cleanCurrStatus ()\n\nClean current status / date of current status based on UpdateData srv field. Clear Current Status and Date of Current Status if only pre-deceased spouse death reported.\n\n\n\n\n\n Updates.fixPayeeStatus ()\n\nRemove payee status if it’s a spouse death but not SS in PIN.\n\n\n\n\n\n Updates.pinUpdateCheck ()\n\nDetermine which updates s/b included in/excluded from maintenance file\n\n\n\n\n\n\n\n\n\n Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)\n\nDetermine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.\n\n\n\n\nType\nDetails\n\n\n\n\n_ud\nUpdateData\nud.UpdateData\n\n\nReturns\nbool\nFalse == exclude // True == include",
+    "text": "Class to store and further process UpdateData objects\n\n\n\n\n\n Updates (notes_list:list[str],\n          all_updates:list[srs_updates.update_data.UpdateData]=&lt;factory&gt;,\n          date:str='2025-07-20', rel_pin_ids:list[str]=&lt;factory&gt;,\n          query_df:pandas.core.frame.DataFrame|None=None,\n          test_cml_fp:str|None=None)\n\n\n\n\nnotes_list: list[str]\nall_updates: list[ud.UpdateData] = field(default_factory=_default_empty_list)\ndate: str = _init_ts()\nrel_pin_ids: list[str] = field(default_factory=_default_empty_list)\nquery_df: pd.DataFrame = None\n\n\n\n\n\n\nmethods that run after initializing the Updates object\n\n\n\n\n\n\n Updates.processNotesPrelim ()\n\n*Preliminary processing and conversion of notes into UpdateData objects:\n\nconvert notes into UpdateData objects\nadd first name + suffix if there was a death\ncreate note for re-assigning death-related Harmony logs\nassigns list of UpdateData objects to self.all_updates*\n\n\n\n\n\n\n Updates.filterPinIDs ()\n\nFilter PIN IDs to speed up addAssociatedIDs method. Assigns filtered list to self.rel_pin_ids\n\n\n\n\n\n Updates.addAssociatedIDs ()\n\nFor each UpdateData object, add all associated PIN IDs to ud.rel_pin_ids. E.g., S1234567, X1234567, T1234567, 1234567 would all be associated with a base ID of 1234567.\n\n\n\n\n\n Updates.determineIfSrv ()\n\nCheck if SS in pay\n\n\n\n\n\n Updates.loadQueryDF ()\n\nLoads query tab from CML tracker and assigns to self query_df\n\n\n\n\n\n Updates.addKeyAndTktNum ()\n\nFor each UpdateData object, check self query_df for key and ticket number and assign to ud.key and ud.ticket_num\n\n\n\n\n\n Updates.processPartialAddresses ()\n\nHandle cases where only partial address update is required. Use [partial] flag to indicate such cases.\n\n\n\n\n\n Updates.getPinGroup ()\n\nGet payee/PIN group from curr_mbrs sheet for all associated PIN IDs. Append results to ud.pin_group field.\n\n\n\n\n\n Updates.cleanCurrStatus ()\n\nClean current status / date of current status based on UpdateData srv field. Clear Current Status and Date of Current Status if only pre-deceased spouse death reported.\n\n\n\n\n\n Updates.fixPayeeStatus ()\n\nRemove payee status if it’s a spouse death but not SS in PIN.\n\n\n\n\n\n Updates.pinUpdateCheck ()\n\nDetermine which updates s/b included in/excluded from maintenance file\n\n\n\n\n\n\n\n\n\n Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)\n\nDetermine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.\n\n\n\n\nType\nDetails\n\n\n\n\n_ud\nUpdateData\nud.UpdateData\n\n\nReturns\nbool\nFalse == exclude // True == include",
     "crumbs": [
-      "03_srs_specific"
+      "API Reference",
+      "srs_specific"
     ]
   },
   {
     "objectID": "srs_specific.html#fields",
     "href": "srs_specific.html#fields",
-    "title": "03_srs_specific",
+    "title": "srs_specific",
     "section": "",
     "text": "notes_list: list[str]\nall_updates: list[ud.UpdateData] = field(default_factory=_default_empty_list)\ndate: str = _init_ts()\nrel_pin_ids: list[str] = field(default_factory=_default_empty_list)\nquery_df: pd.DataFrame = None",
     "crumbs": [
-      "03_srs_specific"
+      "API Reference",
+      "srs_specific"
     ]
   },
   {
     "objectID": "srs_specific.html#methods",
     "href": "srs_specific.html#methods",
-    "title": "03_srs_specific",
+    "title": "srs_specific",
     "section": "",
     "text": "methods that run after initializing the Updates object\n\n\n\n\n\n\n Updates.processNotesPrelim ()\n\n*Preliminary processing and conversion of notes into UpdateData objects:\n\nconvert notes into UpdateData objects\nadd first name + suffix if there was a death\ncreate note for re-assigning death-related Harmony logs\nassigns list of UpdateData objects to self.all_updates*\n\n\n\n\n\n\n Updates.filterPinIDs ()\n\nFilter PIN IDs to speed up addAssociatedIDs method. Assigns filtered list to self.rel_pin_ids\n\n\n\n\n\n Updates.addAssociatedIDs ()\n\nFor each UpdateData object, add all associated PIN IDs to ud.rel_pin_ids. E.g., S1234567, X1234567, T1234567, 1234567 would all be associated with a base ID of 1234567.\n\n\n\n\n\n Updates.determineIfSrv ()\n\nCheck if SS in pay\n\n\n\n\n\n Updates.loadQueryDF ()\n\nLoads query tab from CML tracker and assigns to self query_df\n\n\n\n\n\n Updates.addKeyAndTktNum ()\n\nFor each UpdateData object, check self query_df for key and ticket number and assign to ud.key and ud.ticket_num\n\n\n\n\n\n Updates.processPartialAddresses ()\n\nHandle cases where only partial address update is required. Use [partial] flag to indicate such cases.\n\n\n\n\n\n Updates.getPinGroup ()\n\nGet payee/PIN group from curr_mbrs sheet for all associated PIN IDs. Append results to ud.pin_group field.\n\n\n\n\n\n Updates.cleanCurrStatus ()\n\nClean current status / date of current status based on UpdateData srv field. Clear Current Status and Date of Current Status if only pre-deceased spouse death reported.\n\n\n\n\n\n Updates.fixPayeeStatus ()\n\nRemove payee status if it’s a spouse death but not SS in PIN.\n\n\n\n\n\n Updates.pinUpdateCheck ()\n\nDetermine which updates s/b included in/excluded from maintenance file\n\n\n\n\n\n\n\n\n\n Updates.finalPinUpdateChk (_ud:srs_updates.update_data.UpdateData)\n\nDetermine whether an update should be excluded from maintenance file. Reasons to exclude: specifically flagged to exclude, no related IDs in PIN, no updates where PIN also needs to be updated.\n\n\n\n\nType\nDetails\n\n\n\n\n_ud\nUpdateData\nud.UpdateData\n\n\nReturns\nbool\nFalse == exclude // True == include",
     "crumbs": [
-      "03_srs_specific"
+      "API Reference",
+      "srs_specific"
     ]
   },
   {
     "objectID": "update_xl.html",
     "href": "update_xl.html",
-    "title": "08_update_xl",
+    "title": "update_xl",
     "section": "",
     "text": "Despite not being best practice, many teams continue to use Excel as a sort of lightweight ‘database’ due to its accessibility and familiarity.\nThis module simplifies the process of updating such ‘databases’, providing a set of features to make data updates more effortless, reliable, and traceable.",
     "crumbs": [
-      "08_update_xl"
+      "API Reference",
+      "update_xl"
     ]
   },
   {
     "objectID": "update_xl.html#key-features",
     "href": "update_xl.html#key-features",
-    "title": "08_update_xl",
+    "title": "update_xl",
     "section": "Key Features",
     "text": "Key Features\n\nSimplicity: Only needing to provide the data that needs to be updated - leave any other fields blank.\n\nThe system automatically retains the original values for empty cells, streamlining the update process by eliminating the need to re-enter unchanged information.\n\nTraceable Changes: Creates a human readable changelog showing exactly what was updated and when.\nData Validation: Comprehensive validation checks to ensure data integrity, such as checking for duplicates, invalid IDs, etc.\nAppend At End: Ability to append to, instead of overwrite, existing data. Useful for Comments / Notes columns, for instance.\nPreserve Formatting: Ability to preserve existing notes and formatting in the original data file.",
     "crumbs": [
-      "08_update_xl"
+      "API Reference",
+      "update_xl"
     ]
   },
   {
     "objectID": "update_xl.html#update",
     "href": "update_xl.html#update",
-    "title": "08_update_xl",
+    "title": "update_xl",
     "section": "update",
     "text": "update\n\n\nmain\n\n main (key_col:str, str_cols:Optional[list]=None,\n       input_file:str='./Book1.xlsx', _changelog_dir:str='./')\n\n…\n\n\n\n\n\n\n\n\n\n\nType\nDefault\nDetails\n\n\n\n\nkey_col\nstr\n\nUnique id column\n\n\nstr_cols\nOptional\nNone\nAdd all cols where there may be leading zeroes that should be preserved, or if the values should be read in as string.\n\n\ninput_file\nstr\n./Book1.xlsx\nPath to input file\n\n\n_changelog_dir\nstr\n./\nSet path for changelog yml output. Default is cwd.\n\n\nReturns\nNone",
     "crumbs": [
-      "08_update_xl"
+      "API Reference",
+      "update_xl"
     ]
   },
   {
@@ -254,7 +267,7 @@
     "section": "",
     "text": "import os\nimport sys\nfrom pathlib import Path\n\nimport pandas as pd\nfrom loguru import logger as lg\nfrom pandas import DataFrame\nfrom pandas.core.frame import DataFrame\n\nfrom srs_updates import harmony_automation as ha\nfrom srs_updates.core import fp, yaml_helper\n\npage = await ha.start_page()\n\n\nawait ha.login(page)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Close / Re-assign Harmony Tickets"
     ]
   },
@@ -265,7 +278,7 @@
     "section": "",
     "text": "import os\nimport sys\nfrom pathlib import Path\n\nimport pandas as pd\nfrom loguru import logger as lg\nfrom pandas import DataFrame\nfrom pandas.core.frame import DataFrame\n\nfrom srs_updates import harmony_automation as ha\nfrom srs_updates.core import fp, yaml_helper\n\npage = await ha.start_page()\n\n\nawait ha.login(page)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Close / Re-assign Harmony Tickets"
     ]
   },
@@ -276,7 +289,7 @@
     "section": "fxs",
     "text": "fxs\n\n\nloadTktData\n\n loadTktData ()\n\n-&gt; tuple[DataFrame, str]",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Close / Re-assign Harmony Tickets"
     ]
   },
@@ -287,7 +300,7 @@
     "section": "load data",
     "text": "load data\n\ndf, latest = loadTktData()\nm = df[\"log_action\"].str.strip() == \"N\"\nCLOSE = df[m].copy()\nREASSIGN = df[~m].copy()\n\n\nsys.exit(0)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Close / Re-assign Harmony Tickets"
     ]
   },
@@ -298,7 +311,7 @@
     "section": "close",
     "text": "close\n\ntry:\n    test = yaml_helper(latest, \"r\")\n    already_closed: list[str] = test[\"closed\"]\nexcept:\n    already_closed = []\n\nfor i in range(len(CLOSE)):\n    tkt = str(CLOSE.iloc[i, 0])\n    if tkt not in already_closed:\n        await ha.close_log(page, tkt, trk_fp=latest, note=\"Done\")\n\n\nx, y = len(set(yaml_helper(latest, \"r\")[\"closed\"])), len(CLOSE)\nprint(x, y)\n\n\nsys.exit(0)",
     "crumbs": [
-      "scripts",
+      "Scripts",
       "Close / Re-assign Harmony Tickets"
     ]
   }
